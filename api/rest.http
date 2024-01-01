@@ -1,0 +1,45 @@
+
+@rootApi=http://localhost:8000
+
+
+
+@userApi={{rootApi}}/api/v1/user
+
+### server testing
+GET {{rootApi}}
+
+
+# ========== user api =============
+###get user 
+
+GET {{userApi}}
+Content-Type: application/json
+
+{
+    "fName":"Sam",
+    "lName":"Smith",
+    "phone":"01236544778",
+    "address":"somewhere in the Sydney",
+    "email":"sam@emaiul",
+    "password":"123456"
+}
+
+
+###create user in db
+
+POST {{userApi}}
+Content-Type: application/json
+
+{
+    "role":"admin",
+    "fName":"Sam",
+    "lName":"Smith",
+    "phone":"01236544778",
+    "address":"somewhere in the Sydney",
+    "email":"sam@emaiul",
+    "password":"123456"
+}
+
+
+
+# ==================== Book Api 
