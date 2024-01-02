@@ -36,7 +36,7 @@ Content-Type: application/json
     "lName":"Smith",
     "phone":"01236544778",
     "address":"somewhere in the Sydney",
-    "email":"sam@emaiul",
+    "email":"sam@emaiul.com",
     "password":"123456"
 }
 

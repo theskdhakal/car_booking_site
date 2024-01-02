@@ -25,8 +25,14 @@ const SignUp = () => {
 
     //call api and send form data
 
-    const data = await postUser(rest);
-    console.log(data);
+    const dataPromise = postUser(rest);
+    toast.promise(dataPromise, {
+      pending: "Please wait ......",
+    });
+
+    const data = await dataPromise;
+    const { status, message } = data;
+    toast[status](message);
   };
 
   return (
