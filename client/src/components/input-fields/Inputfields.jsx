@@ -51,3 +51,21 @@ export const signUpInputs = [
     minLength: "6",
   },
 ];
+
+export const signInInputs = [
+  {
+    label: " Email",
+    name: "email",
+    required: true,
+    placeholder: "DavidM@gmail.com",
+    type: "email",
+  },
+  {
+    label: "Password",
+    name: "password",
+    required: true,
+    placeholder: "***********",
+    type: "password",
+    minLength: "6",
+  },
+];
