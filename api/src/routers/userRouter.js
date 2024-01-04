@@ -65,10 +65,12 @@ router.post("/signin",async(req,res)=>{
    console.log(isMatch);
    
 if(isMatch){
+  user.password=undefined;
+
 return res.json({
   status:"success",
   message:"Logged in successfully",
-
+  user,
 })
 } 
 res.json({

@@ -3,24 +3,26 @@ import { MainLayout } from "../../components/mainLayout/MainLayout";
 import CustomInput from "../../components/custom-input/CustomInput";
 import { signInInputs } from "../../components/input-fields/Inputfields";
 import { signInAction } from "./userAction";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
-  const [form,setForm]=useState({})
+  const dispatch = useDispatch();
+  const [form, setForm] = useState({});
 
-const handleOnChange=(e)=>{
-  const {name,value}=e.target
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
 
-  setForm({
-    ...form,[name]:value
-  })
-}
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
 
-const handleOnSubmit=(e)=>{
-  e.preventDefault()
-
-  signInAction(form)
-}
+    dispatch(signInAction(form));
+  };
   return (
     <MainLayout>
       <div className="grid min-h-screen place-items-center p-3">
@@ -29,7 +31,7 @@ const handleOnSubmit=(e)=>{
           <hr />
           <form onSubmit={handleOnSubmit}>
             {signInInputs.map((item, i) => (
-              <CustomInput key={i} {...item}  onChange={handleOnChange}/>
+              <CustomInput key={i} {...item} onChange={handleOnChange} />
             ))}
 
             <div className="d-grid">
@@ -37,7 +39,7 @@ const handleOnSubmit=(e)=>{
                 type="submit "
                 className="w-full my-5 py-2 rounded-md bg-blue-500 text-white"
               >
-             Sign In
+                Sign In
               </button>
             </div>
           </form>
