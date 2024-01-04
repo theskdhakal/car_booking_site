@@ -1,6 +1,6 @@
 import express from "express";
-import { insertUser } from "../models/user/UserModel.js";
-import { hashPassword } from "../utils/bcrypt.js";
+import { getUserByEmail, insertUser } from "../models/user/UserModel.js";
+import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 
 const router = express.Router();
 
@@ -47,5 +47,41 @@ router.post("/", async (req, res) => {
     });
   }
 });
+
+router.post("/signin",async(req,res)=>{
+  try {
+
+    //destructure the email and pwd
+   const {email,password}=req.body
+
+
+   //find if user with email is registered
+   const user=await getUserByEmail(email)
+
+
+   //check if pwd is correct (use bcrypt )
+   const isMatch=comparePassword(password, user.password)
+
+   console.log(isMatch);
+   
+if(isMatch){
+return res.json({
+  status:"success",
+  message:"Logged in successfully",
+
+})
+} 
+res.json({
+  status:"error",
+  message:"Invalid Credentials",
+    })
+    
+  } catch (error) {
+    res.json({
+      status:"error",
+      message:error.message
+    })
+  }
+})
 
 export default router;

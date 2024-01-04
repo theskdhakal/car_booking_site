@@ -13,7 +13,21 @@ export const postUser = async (data) => {
   } catch (error) {
     return {
       status: "error",
-      message: "error.message",
+      message: error.message,
     };
   }
 };
+
+export const loginUser=async(userData)=>{
+  console.log(userData);
+  try {
+    const {data}=await axios.post(userAPI + "/signin", userData)
+    
+    return data;
+  } catch (error) {
+    return{
+      status:"error",
+      message:error.message
+    }
+  }
+}
