@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MainLayout } from "../../components/mainLayout/MainLayout";
 import CustomInput from "../../components/custom-input/CustomInput";
 import { signInInputs } from "../../components/input-fields/Inputfields";
 import { signInAction } from "./userAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({});
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.userInfo);
+
+  useEffect(() => {
+    user?._id && navigate("/dashboard");
+  }, [user?._id, navigate]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
