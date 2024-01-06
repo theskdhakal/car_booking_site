@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <nav className="bg-primary w-full border-b py-0 md:border-1 md:static">
-      <div className="items-center justify-between  px-4 max-w-screen-xl mx-auto flex lg:flex md:px-8">
+      <div className="items-center justify-between  px-1 max-w-screen-xl mx-auto flex lg:flex md:px-2">
         <div className="flex items-center justify-between py-0  ">
           <img src={logo} width={121} alt="Float UI logo" />
         </div>

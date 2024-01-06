@@ -48,42 +48,48 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/signin",async(req,res)=>{
+router.post("/signin", async (req, res) => {
+  console.log(req.body);
   try {
-
     //destructure the email and pwd
-   const {email,password}=req.body
+    const { email, password } = req.body;
 
+    console.log(password);
 
-   //find if user with email is registered
-   const user=await getUserByEmail(email)
+    //find if user with email is registered
+    const user = await getUserByEmail(email);
 
+    if (!user) {
+      return res.json({
+        status: "error",
+        message: "User not found",
+      });
+    }
 
-   //check if pwd is correct (use bcrypt )
-   const isMatch=comparePassword(password, user.password)
+    //check if pwd is correct (use bcrypt )
+    const isMatch = comparePassword(password, user.password);
 
-   console.log(isMatch);
-   
-if(isMatch){
-  user.password=undefined;
+    console.log(isMatch);
 
-return res.json({
-  status:"success",
-  message:"Logged in successfully",
-  user,
-})
-} 
-res.json({
-  status:"error",
-  message:"Invalid Credentials",
-    })
-    
+    if (isMatch) {
+      user.password = undefined;
+
+      return res.json({
+        status: "success",
+        message: "Logged in successfully",
+        user,
+      });
+    }
+    res.json({
+      status: "error",
+      message: "Invalid Credentials",
+    });
   } catch (error) {
     res.json({
-      status:"error",
-      message:error.message
-    })
+      status: "error",
+      message: error.message,
+    });
   }
-})
+});
 
 export default router;
