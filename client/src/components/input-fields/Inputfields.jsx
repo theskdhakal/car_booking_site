@@ -69,3 +69,34 @@ export const signInInputs = [
     minLength: "6",
   },
 ];
+
+export const carInputs = [
+  {
+    label: "Car Name",
+    name: "title",
+    type: "text",
+    placeholder: "GT Wagon",
+    required: true,
+  },
+  {
+    label: "Price/day",
+    name: "price",
+    type: "number",
+    placeholder: "$200/day",
+    required: true,
+  },
+  {
+    label: "Year",
+    name: "year",
+    type: "number",
+    required: true,
+  },
+
+  {
+    label: "Thumbnail",
+    name: "thumbnail",
+    type: "file",
+    accept: "image/*,video/*",
+    required: true,
+  },
+];

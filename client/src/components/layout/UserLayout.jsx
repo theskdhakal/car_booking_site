@@ -47,7 +47,7 @@ export const UserLayout = ({ children }) => {
                     <Link to="/user">Users</Link>
                   </li>
                   <li>
-                    <Link to="/signin">Profile</Link>
+                    <Link to="/profile">Profile</Link>
                   </li>
 
                   <li>

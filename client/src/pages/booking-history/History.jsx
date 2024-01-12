@@ -1,8 +1,8 @@
 import React from "react";
 import { UserLayout } from "../../components/layout/UserLayout";
 
-const Dashboard = () => {
-  return <UserLayout>Dashboard</UserLayout>;
+const History = () => {
+  return <UserLayout>History</UserLayout>;
 };
 
-export default Dashboard;
+export default History;

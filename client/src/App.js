@@ -7,6 +7,11 @@ import SignUp from "./pages/signup-signIn/SignUp";
 import SignIn from "./pages/signup-signIn/SignIn";
 import Dashboard from "./pages/dashboard/Dashboard";
 import PrivateRoute from "./components/private-route/PrivateRoute";
+import Cars from "./pages/car-directory/Cars";
+import Users from "./pages/users/Users";
+import UserProfile from "./pages/profile/UserProfile";
+import History from "./pages/booking-history/History";
+import CarForm from "./components/car-component/CarForm";
 
 // const notify = () => toast("here is your toast");
 
@@ -17,11 +22,53 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+
+        {/* *****************private Routes ********************** */}
         <Route
           path="/dashboard"
           element={
             <PrivateRoute>
               <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <UserProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/car-directory"
+          element={
+            <PrivateRoute>
+              <Cars />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/user"
+          element={
+            <PrivateRoute>
+              <Users />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/booking-history"
+          element={
+            <PrivateRoute>
+              <History />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/car/new"
+          element={
+            <PrivateRoute>
+              <CarForm />
             </PrivateRoute>
           }
         />
