@@ -19,8 +19,10 @@ app.use(cors());
 
 //APIs
 import userRouter from "./src/routers/userRouter.js";
+import carRouter from "./src/routers/carRouter.js";
 
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/car", carRouter);
 
 // server
 app.use("/", (req, res) => {

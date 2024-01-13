@@ -1,6 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const CarTable = () => {
+  const { cars } = useSelector((state) => state.carInfo);
   return (
     <div>
       <h1 className="text-center underline mb-5 ">Car -inventory</h1>
@@ -14,56 +16,31 @@ const CarTable = () => {
                   S.N
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  Product
+                  Name
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  Color
-                </th>
-                <th scope="col" class="px-6 py-3">
-                  Category
+                  Year
                 </th>
                 <th scope="col" class="px-6 py-3">
                   Price
                 </th>
+                <th scope="col" class="px-6 py-3">
+                  description
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr class="bg-white border-b ">
-                <td class="px-6 py-4">1</td>
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
-                >
-                  Apple MacBook Pro 17"
-                </th>
-                <td class="px-6 py-4">Silver</td>
-                <td class="px-6 py-4">Laptop</td>
-                <td class="px-6 py-4">$2999</td>
-              </tr>
-              <tr class="bg-white border-b  ">
-                <td class="px-6 py-4">2</td>
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
-                >
-                  Microsoft Surface Pro
-                </th>
-                <td class="px-6 py-4">White</td>
-                <td class="px-6 py-4">Laptop PC</td>
-                <td class="px-6 py-4">$1999</td>
-              </tr>
-              <tr class="bg-white ">
-                <td class="px-6 py-4">3</td>
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
-                >
-                  Magic Mouse 2
-                </th>
-                <td class="px-6 py-4">Black</td>
-                <td class="px-6 py-4">Accessories</td>
-                <td class="px-6 py-4">$99</td>
-              </tr>
+              {cars.map((car, index) => (
+                <tr key={index} className="bg-white border-b">
+                  <td className="px-6 py-4">{index + 1}</td>
+                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    {car.title}
+                  </td>
+                  <td className="px-6 py-4">{car.year}</td>
+                  <td className="px-6 py-4">{car.price}</td>
+                  <td className="px-6 py-4">{car.description}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
