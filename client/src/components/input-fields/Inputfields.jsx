@@ -89,7 +89,6 @@ export const carInputs = [
     label: "Year",
     name: "year",
     type: "number",
-    required: true,
   },
 
   {

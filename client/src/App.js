@@ -12,10 +12,22 @@ import Users from "./pages/users/Users";
 import UserProfile from "./pages/profile/UserProfile";
 import History from "./pages/booking-history/History";
 import CarForm from "./components/car-component/CarForm";
+import { useDispatch } from "react-redux";
+
+import { useEffect } from "react";
+import { fetchCarAction } from "./pages/car-directory/CarAction";
 
 // const notify = () => toast("here is your toast");
 
 function App() {
+  const dispatch = useDispatch();
+
+  //fetch all cars
+
+  useEffect(() => {
+    dispatch(fetchCarAction());
+  }, [dispatch]);
+
   return (
     <div className="">
       <Routes>

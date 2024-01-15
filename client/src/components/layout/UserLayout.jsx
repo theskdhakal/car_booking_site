@@ -33,7 +33,7 @@ export const UserLayout = ({ children }) => {
       <Header />
       <div className="flex">
         {sidemenu && (
-          <div className="left-menu bg-primary text-white text-center w-1/6">
+          <div className="left-menu bg-primary text-white text-center w-1/6 z-50">
             {user?.role?.toUpperCase()}
             <hr />
             <ul className=" flex flex-col items-start mt-5 pl-12  space-y-5">

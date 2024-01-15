@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import PopUp from "../modal/PopUp";
 
 const CarTable = () => {
   const { cars } = useSelector((state) => state.carInfo);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleModal = () => {
+    setIsVisible(!isVisible);
+  };
+
+  const handleOnClose = () => {
+    setIsVisible(false);
+  };
+
   return (
     <div>
       <h1 className="text-center underline mb-5 ">Car -inventory</h1>
@@ -21,11 +32,12 @@ const CarTable = () => {
                 <th scope="col" class="px-6 py-3">
                   Name
                 </th>
-                <th scope="col" class="px-6 py-3">
-                  Year
-                </th>
+
                 <th scope="col" class="px-6 py-3">
                   Price/day
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Decription
                 </th>
                 <th scope="col" class="px-6 py-3">
                   Action
@@ -37,19 +49,28 @@ const CarTable = () => {
                 <tr key={index} className="bg-white border-b">
                   <td className="px-6 py-4">{index + 1}</td>
                   <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    <img src={car.image} width={100} alt="" />
+                    <img src={car.image} width={400} alt="" />
                   </td>
                   <td className="px-6 py-4"> {car.title}</td>
-                  <td className="px-6 py-4">{car.year}</td>
 
                   <td className="px-6 py-4">{car.price}</td>
+                  <td className="px-6 py-4">{car.description}</td>
                   <td className="px-6 py-4">
-                    <button className="bg-yellow-400">Edit</button>
+                    <button
+                      className="bg-amber-500 py-1 px-2 rounded"
+                      // data-modal-target="default-modal"
+                      // data-modal-toggle="default-modal"
+                      onClick={toggleModal}
+                    >
+                      Edit
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+
+          <PopUp isVisible={isVisible} onClose={handleOnClose} />
         </div>
       </div>
     </div>

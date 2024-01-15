@@ -16,7 +16,6 @@ const carSchema = new mongoose.Schema({
   },
   year: {
     type: Number,
-    required: true,
   },
 
   image: {

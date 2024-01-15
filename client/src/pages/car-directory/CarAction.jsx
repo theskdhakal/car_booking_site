@@ -13,11 +13,11 @@ export const postNewCarAction = (carObj) => async (dispatch) => {
   toast[status](message);
 
   if (status === "success") {
-    dispatch(fetchBookAction());
+    dispatch(fetchCarAction());
   }
 };
 
-export const fetchBookAction = () => async (dispatch) => {
+export const fetchCarAction = () => async (dispatch) => {
   const { status, message, cars } = await getCar();
   console.log(cars);
 
