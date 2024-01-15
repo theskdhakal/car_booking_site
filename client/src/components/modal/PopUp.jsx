@@ -3,7 +3,7 @@ import React from "react";
 import EditCarForm from "../car-component/EditCarForm";
 import { MdCancel } from "react-icons/md";
 
-const PopUp = ({ isVisible, onClose }) => {
+const PopUp = ({ isVisible, onClose, carId }) => {
   const handleOnClick = () => {
     onClose();
   };
@@ -20,7 +20,7 @@ const PopUp = ({ isVisible, onClose }) => {
       </div>
       <div className="bg-white p-1 rounded shadow-lg">
         {/* Your modal content goes here */}
-        <EditCarForm />
+        <EditCarForm carId={carId} />
       </div>
     </div>
   );

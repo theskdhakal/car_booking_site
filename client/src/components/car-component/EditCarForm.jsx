@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomInput from "../custom-input/CustomInput";
 import { carInputs } from "../input-fields/Inputfields";
-import { UserLayout } from "../layout/UserLayout";
 import { postNewCarAction } from "../../pages/car-directory/CarAction";
-import { useDispatch } from "react-redux";
-import { IoChevronBack } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-const EditCarForm = () => {
+const EditCarForm = ({ carId }) => {
   const [form, setForm] = useState({});
+
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  const { cars } = useSelector((state) => state.carInfo);
+
+  const currentCar = cars.find((car) => carId === car._id);
+
+  console.log(currentCar);
+
+  useEffect(() => {
+    //set initial form state when the component mounts
+
+    setForm({
+      title: currentCar.title || "",
+      price: currentCar.price || "",
+      year: currentCar.year || "",
+      description: currentCar.description || "",
+      image: "",
+    });
+  }, [currentCar]);
 
   const handleOnChange = (e) => {
     const { name, value, type } = e.target;
@@ -54,7 +69,12 @@ const EditCarForm = () => {
           </label>
         </div>
         {carInputs.map((item, i) => (
-          <CustomInput Key={i} {...item} onChange={handleOnChange} />
+          <CustomInput
+            Key={i}
+            {...item}
+            value={form[item.name] || ""}
+            onChange={handleOnChange}
+          />
         ))}
         <label className="block mb-2">Description</label>
         <textarea
@@ -65,6 +85,7 @@ const EditCarForm = () => {
           class="border border-gray-500 rounded px-3 py-2 w-full"
           placeholder="description"
           rows="7"
+          value={form.description || ""}
           onChange={handleOnChange}
         ></textarea>
 

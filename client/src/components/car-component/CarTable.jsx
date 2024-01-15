@@ -5,9 +5,11 @@ import PopUp from "../modal/PopUp";
 const CarTable = () => {
   const { cars } = useSelector((state) => state.carInfo);
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedCar, setSelectedCar] = useState();
 
-  const toggleModal = () => {
+  const toggleModal = (carId) => {
     setIsVisible(!isVisible);
+    setSelectedCar(carId);
   };
 
   const handleOnClose = () => {
@@ -60,7 +62,7 @@ const CarTable = () => {
                       className="bg-amber-500 py-1 px-2 rounded"
                       // data-modal-target="default-modal"
                       // data-modal-toggle="default-modal"
-                      onClick={toggleModal}
+                      onClick={() => toggleModal(car._id)}
                     >
                       Edit
                     </button>
@@ -70,7 +72,11 @@ const CarTable = () => {
             </tbody>
           </table>
 
-          <PopUp isVisible={isVisible} onClose={handleOnClose} />
+          <PopUp
+            isVisible={isVisible}
+            onClose={handleOnClose}
+            carId={selectedCar}
+          />
         </div>
       </div>
     </div>
