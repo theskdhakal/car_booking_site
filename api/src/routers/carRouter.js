@@ -1,13 +1,22 @@
 import express from "express";
 import { addCar, getCars } from "../models/car/CarModel.js";
+import { upload } from "../middelware/multerMiddleware.js";
+import uploadFile from "../utils/s3Bucket.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", upload.single("image"), async (req, res) => {
   try {
-    console.log(req.body);
+    if (req.file) {
+      const { Location } = await uploadFile(req.file);
+
+      req.body.image = Location;
+    }
 
     const result = await addCar(req.body);
+
+    req.body;
+    console.log(result);
 
     result?._id
       ? res.json({

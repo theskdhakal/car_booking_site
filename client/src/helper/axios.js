@@ -38,8 +38,13 @@ export const loginUser = async (userData) => {
 
 // **************car****************
 export const postCar = async (obj) => {
+  console.log(obj);
   try {
-    const resp = await axios.post(carAPI, obj);
+    const resp = await axios.post(carAPI, obj, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     console.log(resp);
 
     return resp.data;

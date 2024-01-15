@@ -16,16 +16,19 @@ const CarTable = () => {
                   S.N
                 </th>
                 <th scope="col" class="px-6 py-3">
+                  Image
+                </th>
+                <th scope="col" class="px-6 py-3">
                   Name
                 </th>
                 <th scope="col" class="px-6 py-3">
                   Year
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  Price
+                  Price/day
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  description
+                  Action
                 </th>
               </tr>
             </thead>
@@ -34,11 +37,15 @@ const CarTable = () => {
                 <tr key={index} className="bg-white border-b">
                   <td className="px-6 py-4">{index + 1}</td>
                   <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    {car.title}
+                    <img src={car.image} width={100} alt="" />
                   </td>
+                  <td className="px-6 py-4"> {car.title}</td>
                   <td className="px-6 py-4">{car.year}</td>
+
                   <td className="px-6 py-4">{car.price}</td>
-                  <td className="px-6 py-4">{car.description}</td>
+                  <td className="px-6 py-4">
+                    <button className="bg-yellow-400">Edit</button>
+                  </td>
                 </tr>
               ))}
             </tbody>

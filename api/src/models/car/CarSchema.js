@@ -19,7 +19,7 @@ const carSchema = new mongoose.Schema({
     required: true,
   },
 
-  thumbnail: {
+  image: {
     type: String,
   },
   description: {

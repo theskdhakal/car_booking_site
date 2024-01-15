@@ -13,9 +13,20 @@ const CarForm = () => {
   const navigate = useNavigate();
 
   const handleOnChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
 
-    setForm({ ...form, [name]: value });
+    // If the input is a file input, update imageFile
+    if (type === "file") {
+      setForm({
+        ...form,
+        [name]: e.target.files[0],
+      });
+    } else {
+      setForm({
+        ...form,
+        [name]: value,
+      });
+    }
   };
 
   const handleOnSubmit = (e) => {

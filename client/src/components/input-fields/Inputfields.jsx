@@ -94,7 +94,7 @@ export const carInputs = [
 
   {
     label: "Thumbnail",
-    name: "thumbnail",
+    name: "image",
     type: "file",
     accept: "image/*,video/*",
     required: true,
