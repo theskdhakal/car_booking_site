@@ -13,18 +13,17 @@ const EditCarForm = ({ carId }) => {
 
   const currentCar = cars.find((car) => carId === car._id);
 
-  console.log(currentCar);
-
   useEffect(() => {
     //set initial form state when the component mounts
-
-    setForm({
-      title: currentCar.title || "",
-      price: currentCar.price || "",
-      year: currentCar.year || "",
-      description: currentCar.description || "",
-      image: "",
-    });
+    if (currentCar) {
+      setForm({
+        title: currentCar.title || "",
+        price: currentCar.price || "",
+        year: currentCar.year || "",
+        description: currentCar.description || "",
+        image: "",
+      });
+    }
   }, [currentCar]);
 
   const handleOnChange = (e) => {
@@ -68,14 +67,15 @@ const EditCarForm = ({ carId }) => {
             <div className="w-11  h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
           </label>
         </div>
-        {carInputs.map((item, i) => (
-          <CustomInput
-            Key={i}
-            {...item}
-            value={form[item.name] || ""}
-            onChange={handleOnChange}
-          />
-        ))}
+        {currentCar &&
+          carInputs.map((item, i) => (
+            <CustomInput
+              Key={i}
+              {...item}
+              value={form[item.name] || ""}
+              onChange={handleOnChange}
+            />
+          ))}
         <label className="block mb-2">Description</label>
         <textarea
           key="3"
