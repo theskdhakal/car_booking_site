@@ -18,8 +18,8 @@ const CarTable = () => {
     setIsVisible(false);
   };
 
-  const handleOnDelete = (carId) => {
-    dispatch(deleteCarAction(carId));
+  const handleOnDelete = (_id) => {
+    dispatch(deleteCarAction(_id));
   };
 
   return (

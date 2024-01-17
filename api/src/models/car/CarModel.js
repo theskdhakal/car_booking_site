@@ -11,6 +11,6 @@ export const updateCars = (carId, data) => {
   return CarSchema.findByIdAndUpdate(carId, data);
 };
 
-export const deleteCars = (carId) => {
-  return CarSchema.findByIdAndDelete(carId);
+export const deleteCars = (_id) => {
+  return CarSchema.findByIdAndDelete(_id);
 };

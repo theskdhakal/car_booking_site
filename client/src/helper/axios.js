@@ -88,9 +88,9 @@ export const updateCar = async (obj) => {
   }
 };
 
-export const deleteCar = async (carId) => {
+export const deleteCar = async (_id) => {
   try {
-    const resp = await axios.delete(carId);
+    const resp = await axios.delete(carAPI + "/" + _id);
 
     return resp.data;
   } catch (error) {

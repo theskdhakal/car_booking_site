@@ -92,15 +92,21 @@ router.put("/", upload.single("image"), async (req, res) => {
   }
 });
 
-router.delete("/", async (req, res) => {
-  console.log(req.body);
+router.delete("/:_id", async (req, res) => {
   try {
-    const cars = await deleteCars();
-    res.json({
-      status: "success",
-      message: "Selected Car has been removed from table",
-      cars,
-    });
+    const { _id } = req.params;
+    console.log(_id);
+    const deletedCar = await deleteCars(_id);
+
+    deletedCar
+      ? res.json({
+          status: "success",
+          message: "Selected Car has been removed from table",
+        })
+      : res.json({
+          status: "error",
+          message: "Unable to delete the car",
+        });
   } catch (error) {
     res.json({
       status: "error",

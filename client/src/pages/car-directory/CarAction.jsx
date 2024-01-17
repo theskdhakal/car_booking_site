@@ -41,11 +41,11 @@ export const fetchCarAction = () => async (dispatch) => {
   }
 };
 
-export const deleteCarAction = (carId) => async (dispatch) => {
+export const deleteCarAction = (_id) => async (dispatch) => {
   if (!window.confirm("Are you sure you want to delete it?")) {
     return;
   }
-  const { status, message } = await deleteCar(carId);
+  const { status, message } = await deleteCar(_id);
   toast[status](message);
 
   if (status === "success") {
