@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PopUp from "../modal/PopUp";
+import { deleteCarAction } from "../../pages/car-directory/CarAction";
 
 const CarTable = () => {
   const { cars } = useSelector((state) => state.carInfo);
+  const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
   const [selectedCar, setSelectedCar] = useState();
 
@@ -14,6 +16,10 @@ const CarTable = () => {
 
   const handleOnClose = () => {
     setIsVisible(false);
+  };
+
+  const handleOnDelete = (carId) => {
+    dispatch(deleteCarAction(carId));
   };
 
   return (
@@ -57,14 +63,18 @@ const CarTable = () => {
 
                   <td className="px-6 py-4">{car.price}</td>
                   <td className="px-6 py-4">{car.description}</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 flex py-4">
                     <button
-                      className="bg-amber-500 py-1 px-2 rounded"
-                      // data-modal-target="default-modal"
-                      // data-modal-toggle="default-modal"
+                      className="bg-amber-600 text-white py-1 px-2 rounded"
                       onClick={() => toggleModal(car._id)}
                     >
                       Edit
+                    </button>
+                    <button
+                      className="bg-red-600 text-white ml-2 py-1 px-2 rounded"
+                      onClick={() => handleOnDelete(car._id)}
+                    >
+                      Delete
                     </button>
                   </td>
                 </tr>

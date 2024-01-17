@@ -68,3 +68,35 @@ export const getCar = async (obj) => {
     };
   }
 };
+
+export const updateCar = async (obj) => {
+  console.log(obj);
+  try {
+    const resp = await axios.put(carAPI, obj, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(resp);
+
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
+export const deleteCar = async (carId) => {
+  try {
+    const resp = await axios.delete(carId);
+
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};

@@ -31,7 +31,7 @@ const CarForm = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
+    console.log(form);
     dispatch(postNewCarAction(form));
   };
   return (
