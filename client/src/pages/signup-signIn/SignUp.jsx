@@ -4,6 +4,7 @@ import { signUpInputs } from "../../components/input-fields/Inputfields";
 import CustomInput from "../../components/custom-input/CustomInput";
 import { postUser } from "../../helper/axios";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [form, setForm] = useState();
@@ -55,6 +56,14 @@ const SignUp = () => {
               </button>
             </div>
           </form>
+
+          <div className="text-end text-sm">
+            Already Registered?
+            <br />
+            <Link to="/signin" className="text-blue-500 underline">
+              Login
+            </Link>
+          </div>
         </div>
       </div>
     </MainLayout>

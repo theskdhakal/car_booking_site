@@ -4,7 +4,7 @@ import CustomInput from "../../components/custom-input/CustomInput";
 import { signInInputs } from "../../components/input-fields/Inputfields";
 import { signInAction } from "./userAction";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -51,6 +51,14 @@ const SignIn = () => {
               </button>
             </div>
           </form>
+
+          <div className="text-end text-sm">
+            Don't have account? <br />
+            <Link to="/signup" className="text-blue-500 underline">
+              signup{" "}
+            </Link>
+            here
+          </div>
         </div>
       </div>
     </MainLayout>

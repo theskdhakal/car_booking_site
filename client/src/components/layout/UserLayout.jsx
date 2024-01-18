@@ -11,7 +11,7 @@ import { AiOutlineMenuUnfold, AiOutlineMenuFold } from "react-icons/ai";
 export const UserLayout = ({ children }) => {
   const { user } = useSelector((state) => state.userInfo);
 
-  const [sidemenu, setSidemenu] = useState(false);
+  const [sidemenu, setSidemenu] = useState(true);
   const dispatch = useDispatch();
 
   const handleOnClick = () => {

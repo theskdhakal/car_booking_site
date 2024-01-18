@@ -27,7 +27,10 @@ const Header = () => {
         <div>
           <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             <li>
-              <button
+              <Link to="#" className="shadow-lg p-2 rounded text-white flex">
+                Car Catalogue
+              </Link>
+              {/* <button
                 className="shadow-lg p-2 rounded bg-white flex"
                 onClick={toggleDropdown}
               >
@@ -51,7 +54,7 @@ const Header = () => {
                     <img src={usflag} width="26px" /> AUD
                   </div>
                 </div>
-              )}
+              )} */}
             </li>
 
             {user?._id ? (
