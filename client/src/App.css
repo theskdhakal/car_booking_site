@@ -1,3 +1,39 @@
 .main {
   min-height: calc(100vh - 168px);
 }
+
+.accordion {
+  width: full;
+}
+
+.section {
+  border: 1px solid white;
+
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.section:hover {
+  background-color: gray;
+}
+
+.section-header {
+  padding: 10px;
+}
+
+.section-content {
+  padding: 10px;
+  display: none;
+}
+
+.section.open .section-content {
+  display: block;
+}
+
+.Fleet {
+  left: 50%;
+  position: absolute;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}

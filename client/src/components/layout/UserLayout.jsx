@@ -70,7 +70,7 @@ export const UserLayout = ({ children }) => {
               ) : (
                 <>
                   <li>
-                    <Link to="/signin">Profile</Link>
+                    <Link to="/profile">Profile</Link>
                   </li>
 
                   <li>

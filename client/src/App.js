@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 
 import { useEffect } from "react";
 import { fetchCarAction } from "./pages/car-directory/CarAction";
+import CarFleet from "./pages/car-directory/CarFleet";
 
 // const notify = () => toast("here is your toast");
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/fleet" element={<CarFleet />} />
 
         {/* *****************private Routes ********************** */}
         <Route

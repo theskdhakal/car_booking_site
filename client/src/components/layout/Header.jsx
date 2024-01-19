@@ -27,9 +27,6 @@ const Header = () => {
         <div>
           <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             <li>
-              <Link to="#" className="shadow-lg p-2 rounded text-white flex">
-                Car Catalogue
-              </Link>
               {/* <button
                 className="shadow-lg p-2 rounded bg-white flex"
                 onClick={toggleDropdown}
@@ -58,7 +55,15 @@ const Header = () => {
             </li>
 
             {user?._id ? (
-              <h3 className="text-white bold">Welcome, {user.fName}</h3>
+              <>
+                <Link
+                  to="/dashboard"
+                  className="shadow-lg p-2 rounded text-white flex"
+                >
+                  Dashboard
+                </Link>
+                <h3 className="text-white bold">Welcome, {user.fName}</h3>
+              </>
             ) : (
               <li className="shadow-lg p-2 rounded bg-white">
                 <Link to="/signin">Manage Booking</Link>
