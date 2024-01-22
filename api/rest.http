@@ -3,7 +3,9 @@
 
 
 
-@userApi={{rootApi}}/api/v1/user
+@userApi={{rootApi}}/api/v1/User-Agent: 
+
+@bookingApi={{rootApi}}/api/v1/booking
 
 ### server testing
 GET {{rootApi}}
@@ -42,4 +44,16 @@ Content-Type: application/json
 
 
 
-# ==================== Book Api 
+# ==================== Booking Api 
+###=====create booking record
+POST {{bookingApi}}
+Content-Type: application/json
+
+{
+    "carId":"hagfsd4646",
+    "carName":"BMW",
+    "image":"http//:....",
+    "userId":"sadfg4545",
+    "userName":"sdfgdsg",
+    "returnDate":"2024-1-22"
+}

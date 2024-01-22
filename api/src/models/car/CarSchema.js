@@ -25,6 +25,14 @@ const carSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isAvailable: {
+    type: Boolean,
+    default: true,
+  },
+  dueDate: {
+    type: Date,
+    default: null,
+  },
 });
 
 export default mongoose.model("car", carSchema); //books
