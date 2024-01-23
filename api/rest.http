@@ -3,7 +3,7 @@
 
 
 
-@userApi={{rootApi}}/api/v1/User-Agent: 
+@userApi={{rootApi}}/api/v1/user: 
 
 @bookingApi={{rootApi}}/api/v1/booking
 

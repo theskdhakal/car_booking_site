@@ -44,4 +44,13 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", (req, res) => {
+  try {
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+});
 export default router;

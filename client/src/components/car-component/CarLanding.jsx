@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Reviewbox from "../review/Reviewbox";
 import toast from "react-hot-toast";
@@ -10,10 +10,16 @@ const CarLanding = () => {
   const { _id } = useParams();
   const { cars } = useSelector((state) => state.carInfo);
   const { user } = useSelector((state) => state.userInfo);
-  const selectedCar = cars.find((item) => item._id === _id);
-  const dispatch = useDispatch();
-
+  const selectedCar = cars.find((item) => item._id === _id) || {};
   const [bookingDays, setBookingDays] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { title } = selectedCar;
+
+  if (!title) {
+    return navigate("/");
+  }
 
   const handleOnChange = (e) => {
     setBookingDays(e.target.value.trim());
