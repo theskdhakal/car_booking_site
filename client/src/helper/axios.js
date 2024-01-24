@@ -8,6 +8,24 @@ const carAPI = rootAPI + "/api/v1/car";
 
 const bookingAPI = rootAPI + "/api/v1/booking";
 
+const getUserIdFromLocalStorage = () => {
+  const str = localStorage.getItem("persist:userInfo");
+
+  if (str) {
+    const userInfo = JSON.parse(str);
+
+    if (userInfo.user) {
+      const user = JSON.parse(userInfo.user);
+
+      return user?._id;
+    }
+  }
+
+  return null;
+};
+
+const userId = getUserIdFromLocalStorage();
+
 // ******************user*********************
 
 export const postUser = async (data) => {
@@ -92,7 +110,11 @@ export const updateCar = async (obj) => {
 
 export const deleteCar = async (_id) => {
   try {
-    const resp = await axios.delete(carAPI + "/" + _id);
+    const resp = await axios.delete(carAPI + "/" + _id, {
+      headers: {
+        Authorization: userId,
+      },
+    });
 
     return resp.data;
   } catch (error) {
@@ -108,8 +130,30 @@ export const deleteCar = async (_id) => {
 export const postBooking = async (obj) => {
   console.log(obj);
   try {
-    const resp = await axios.post(bookingAPI, obj, {});
+    const resp = await axios.post(bookingAPI, obj, {
+      headers: {
+        Authorization: userId,
+      },
+    });
     console.log(resp);
+
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
+export const fetchBookingHistory = async () => {
+  console.log(userId);
+  try {
+    const resp = await axios.get(bookingAPI, {
+      headers: {
+        Authorization: userId,
+      },
+    });
 
     return resp.data;
   } catch (error) {

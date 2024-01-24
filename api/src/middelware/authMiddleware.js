@@ -4,6 +4,7 @@ export const auth = async (req, res, next) => {
   try {
     //every request have userId
     const { authorization } = req.headers;
+    console.log(authorization);
 
     //get the user from db
     const user = await getUserById(authorization);

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./pages/signup-signIn/userSlice";
 import carReducer from "./pages/car-directory/carSlice";
+import bookingReducer from "./pages/booking-history/bookingSlice";
 
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
@@ -16,6 +17,7 @@ const store = configureStore({
   reducer: {
     userInfo: persistedUserReducer,
     carInfo: carReducer,
+    bookingInfo: bookingReducer,
   },
 });
 

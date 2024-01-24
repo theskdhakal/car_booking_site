@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { UserLayout } from "../../components/layout/UserLayout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBookingHistoryAction } from "./bookingAction";
 
 const History = () => {
   const { cars } = useSelector((state) => state.carInfo);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("fetchinbg");
+    dispatch(fetchBookingHistoryAction());
+  }, [dispatch]);
   return (
     <UserLayout>
       <table class="w-full text-sm text-left rtl:text-right text-gray-500 border ">
@@ -18,7 +25,6 @@ const History = () => {
             <th scope="col" class="px-6 py-3">
               Car Name
             </th>
-
             <th scope="col" class="px-6 py-3">
               Client Name
             </th>
@@ -44,7 +50,7 @@ const History = () => {
 
               <td className="px-6 py-4">{car.price}</td>
               <td className="px-6 py-4">{car.description}</td>
-              <td className="px-6 flex py-4">
+              {/* <td className="px-6 flex py-4">
                 <button
                   className="bg-amber-600 text-white py-1 px-2 rounded"
                   onClick={() => toggleModal(car._id)}
@@ -57,7 +63,7 @@ const History = () => {
                 >
                   Delete
                 </button>
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>

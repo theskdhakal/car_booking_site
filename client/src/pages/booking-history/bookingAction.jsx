@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
-import { postBooking } from "../../helper/axios";
+import { fetchBookingHistory, postBooking } from "../../helper/axios";
 import { fetchCarAction } from "../car-directory/CarAction";
+import { setbookings } from "./bookingSlice";
 
 // *********booking section *****************
 export const addNewBookingAction = (obj) => async (dispatch) => {
@@ -12,5 +13,16 @@ export const addNewBookingAction = (obj) => async (dispatch) => {
   //fetch user booking
   if (status === "success") {
     dispatch(fetchCarAction());
+  }
+};
+export const fetchBookingHistoryAction = () => async (dispatch) => {
+  const { status, message, bookingHistory } = await fetchBookingHistory();
+  console.log(status, message);
+
+  toast[status](message);
+
+  //fetch user booking
+  if (status === "success") {
+    dispatch(setbookings(bookingHistory));
   }
 };
