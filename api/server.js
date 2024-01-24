@@ -13,6 +13,7 @@ import connectMongoDB from "./src/config/mongoConfig.js";
 connectMongoDB();
 
 //middlewares
+auth;
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
@@ -21,10 +22,11 @@ app.use(cors());
 import userRouter from "./src/routers/userRouter.js";
 import carRouter from "./src/routers/carRouter.js";
 import bookingRouter from "./src/routers/bookingRouter.js";
+import { adminAuth, auth } from "./src/middelware/authMiddleware.js";
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/car", carRouter);
-app.use("/api/v1/booking", bookingRouter);
+app.use("/api/v1/booking", auth, bookingRouter);
 
 // server
 app.use("/", (req, res) => {

@@ -1,5 +1,9 @@
 import express from "express";
-import { addBooking } from "../models/booking/BookingModel.js";
+import {
+  addBooking,
+  getBookings,
+  getBookingsByUserId,
+} from "../models/booking/BookingModel.js";
 import { updateCars } from "../models/car/CarModel.js";
 
 const router = express.Router();
@@ -44,8 +48,18 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
+    const { role, _id } = req.body.userInfo;
+
+    const bookingHistory =
+      role === "admin" ? await getBookings() : await getBookingsByUserId(_id);
+
+    res.json({
+      status: "success",
+      message: "burrowList",
+      bookingHistory,
+    });
   } catch (error) {
     res.json({
       status: "error",

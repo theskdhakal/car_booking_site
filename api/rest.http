@@ -4,6 +4,7 @@
 
 
 @userApi={{rootApi}}/api/v1/user: 
+@carApi={{rootApi}}/api/v1/car
 
 @bookingApi={{rootApi}}/api/v1/booking
 
@@ -25,6 +26,12 @@ Content-Type: application/json
     "email":"sam@emaiul",
     "password":"123456"
 }
+
+
+
+#####
+GET {{carApi}}
+Authorization:659627fb185beb54110683fe
 
 
 ###create user in db
@@ -57,3 +64,7 @@ Content-Type: application/json
     "userName":"sdfgdsg",
     "returnDate":"2024-1-22"
 }
+
+###
+GET {{bookingApi}}
+Authorization:659627fb185beb54110683fe

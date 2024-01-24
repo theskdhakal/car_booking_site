@@ -7,10 +7,11 @@ import {
 } from "../models/car/CarModel.js";
 import { upload } from "../middelware/multerMiddleware.js";
 import uploadFile from "../utils/s3Bucket.js";
+import { adminAuth, auth } from "../middelware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", upload.single("image"), async (req, res) => {
+router.post("/", auth, adminAuth, upload.single("image"), async (req, res) => {
   try {
     if (req.file) {
       const { Location } = await uploadFile(req.file);
@@ -56,7 +57,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.put("/", upload.single("image"), async (req, res) => {
+router.put("/", auth, adminAuth, upload.single("image"), async (req, res) => {
   try {
     console.log(req.file);
 
@@ -92,7 +93,7 @@ router.put("/", upload.single("image"), async (req, res) => {
   }
 });
 
-router.delete("/:_id", async (req, res) => {
+router.delete("/:_id", auth, adminAuth, async (req, res) => {
   try {
     const { _id } = req.params;
     console.log(_id);
