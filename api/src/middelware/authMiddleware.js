@@ -4,11 +4,9 @@ export const auth = async (req, res, next) => {
   try {
     //every request have userId
     const { authorization } = req.headers;
-    console.log(authorization);
 
     //get the user from db
     const user = await getUserById(authorization);
-    // console.log(user);
 
     if (user?._id) {
       //check the role
@@ -35,10 +33,8 @@ export const auth = async (req, res, next) => {
 };
 
 export const adminAuth = async (req, res, next) => {
-  console.log(req.userInfo);
   try {
-    const { role } = req.userInfo;
-    console.log(role);
+    const { role } = req.body.userInfo;
 
     role === "admin"
       ? next()

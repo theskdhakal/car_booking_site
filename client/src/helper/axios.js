@@ -76,7 +76,7 @@ export const postCar = async (obj) => {
   }
 };
 
-export const getCar = async (obj) => {
+export const getCar = async () => {
   try {
     const resp = await axios.get(carAPI);
 
@@ -131,6 +131,25 @@ export const postBooking = async (obj) => {
   console.log(obj);
   try {
     const resp = await axios.post(bookingAPI, obj, {
+      headers: {
+        Authorization: userId,
+      },
+    });
+    console.log(resp);
+
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
+export const returnBooking = async (obj) => {
+  console.log(obj);
+  try {
+    const resp = await axios.patch(bookingAPI, obj, {
       headers: {
         Authorization: userId,
       },

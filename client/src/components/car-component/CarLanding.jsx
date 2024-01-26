@@ -35,6 +35,7 @@ const CarLanding = () => {
       carName: selectedCar?.title,
       userId: user?._id,
       userName: user?.fName,
+      userRole: user?.role,
       image: selectedCar?.image,
       bookingDays: parseInt(bookingDays, 10),
     };

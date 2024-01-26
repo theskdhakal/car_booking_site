@@ -19,6 +19,10 @@ const bookingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    userRole: {
+      type: String,
+      required: true,
+    },
     image: {
       type: String,
     },
@@ -29,10 +33,6 @@ const bookingSchema = new mongoose.Schema(
     isReturned: {
       type: Boolean,
       default: false,
-    },
-    returnedDate: {
-      type: Date,
-      default: null,
     },
   },
   {

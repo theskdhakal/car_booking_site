@@ -14,8 +14,8 @@ export const getBookingsByUserId = (userId) => {
   return BookingSchema.find(userId);
 };
 
-export const updateBookings = (BookingId, data) => {
-  return BookingSchema.findByIdAndUpdate(BookingId, data);
+export const updateBooking = (bookingId, data) => {
+  return BookingSchema.findByIdAndUpdate(bookingId, data);
 };
 
 export const deleteBookings = (_id) => {

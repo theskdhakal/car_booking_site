@@ -4,9 +4,13 @@ import { Link } from "react-router-dom";
 const CustomCard = ({ image, _id, title, price }) => {
   return (
     <Link to={`/cars/${_id}`}>
-      <div className="w-full max-w-sm bg-primary border border-gray-200 rounded-lg shadow ">
+      <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
         <div>
-          <img className="p-8 rounded-t-lg" src={image} alt="product image" />
+          <img
+            className="p-2 rounded-t-lg h-72"
+            src={image}
+            alt="product image"
+          />
         </div>
         <div className="px-5 pb-5">
           <div>
