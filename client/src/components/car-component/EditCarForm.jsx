@@ -55,7 +55,7 @@ const EditCarForm = ({ carId }) => {
   };
 
   return (
-    <div className="p-2">
+    <div className="p-2 ">
       <h3 className="text-center underline">Edit Car Details</h3>
       <form
         className="border mt-2 p-3 shadow-lg w-full"

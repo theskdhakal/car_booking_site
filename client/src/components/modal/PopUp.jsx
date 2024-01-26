@@ -13,7 +13,7 @@ const PopUp = ({ isVisible, onClose, carId }) => {
       aria-hidden="true"
       className={`${
         isVisible ? "" : "hidden"
-      } overflow-y-auto overflow-x-hidden fixed w-3/4 mx-auto my-11 top-1/2 right-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1 bg-white rounded shadow-lg max-w-full`}
+      } overflow-y-auto overflow-x-hidden fixed w-full mx-auto my-11 top-1/2 right-0  left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1 bg-white rounded shadow-lg max-w-full`}
     >
       <div className="absolute  top-0 right-0 p-2 cursor-pointer">
         <MdCancel size={20} onClick={handleOnClick} />

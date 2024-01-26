@@ -24,8 +24,6 @@ const getUserIdFromLocalStorage = () => {
   return null;
 };
 
-const userId = getUserIdFromLocalStorage();
-
 // ******************user*********************
 
 export const postUser = async (data) => {
@@ -63,6 +61,7 @@ export const postCar = async (obj) => {
     const resp = await axios.post(carAPI, obj, {
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: getUserIdFromLocalStorage(),
       },
     });
     console.log(resp);
@@ -95,6 +94,7 @@ export const updateCar = async (obj) => {
     const resp = await axios.put(carAPI, obj, {
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: getUserIdFromLocalStorage(),
       },
     });
     console.log(resp);
@@ -112,7 +112,7 @@ export const deleteCar = async (_id) => {
   try {
     const resp = await axios.delete(carAPI + "/" + _id, {
       headers: {
-        Authorization: userId,
+        Authorization: getUserIdFromLocalStorage(),
       },
     });
 
@@ -132,7 +132,7 @@ export const postBooking = async (obj) => {
   try {
     const resp = await axios.post(bookingAPI, obj, {
       headers: {
-        Authorization: userId,
+        Authorization: getUserIdFromLocalStorage(),
       },
     });
     console.log(resp);
@@ -151,7 +151,7 @@ export const returnBooking = async (obj) => {
   try {
     const resp = await axios.patch(bookingAPI, obj, {
       headers: {
-        Authorization: userId,
+        Authorization: getUserIdFromLocalStorage(),
       },
     });
     console.log(resp);
@@ -166,11 +166,10 @@ export const returnBooking = async (obj) => {
 };
 
 export const fetchBookingHistory = async () => {
-  console.log(userId);
   try {
     const resp = await axios.get(bookingAPI, {
       headers: {
-        Authorization: userId,
+        Authorization: getUserIdFromLocalStorage(),
       },
     });
 

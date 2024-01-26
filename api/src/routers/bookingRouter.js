@@ -93,9 +93,13 @@ router.patch("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const { role, _id } = req.body.userInfo;
+    const userId = _id;
+    console.log(userId);
 
     const bookingHistory =
-      role === "admin" ? await getBookings() : await getBookingsByUserId(_id);
+      role === "admin"
+        ? await getBookings()
+        : await getBookingsByUserId(userId);
 
     res.json({
       status: "success",

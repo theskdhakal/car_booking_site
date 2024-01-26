@@ -11,7 +11,7 @@ export const getBookings = () => {
 
 //retrieve user specific booking using UserId
 export const getBookingsByUserId = (userId) => {
-  return BookingSchema.find(userId);
+  return BookingSchema.find({ userId: userId });
 };
 
 export const updateBooking = (bookingId, data) => {

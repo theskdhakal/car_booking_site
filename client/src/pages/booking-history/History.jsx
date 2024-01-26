@@ -12,7 +12,6 @@ const History = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("fetchinbg");
     dispatch(fetchBookingHistoryAction());
   }, [dispatch]);
 
@@ -58,7 +57,7 @@ const History = () => {
           </tr>
         </thead>
         <tbody>
-          {bookings.map((item, index) => (
+          {bookings?.map((item, index) => (
             <tr key={index} className="bg-white border-b">
               <td className="px-6 py-4">{index + 1}</td>
               <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
@@ -70,17 +69,17 @@ const History = () => {
               <td className="px-6 py-4">{item?.dueDate?.slice(0, 10)}</td>
 
               <td className="px-6 py-4">
-                {item.userRole === "admin" && (
+                {user?.role === "admin" ? (
                   <>
                     <div className="flex items-center mb-4">
                       <input
                         id="default-radio-1"
                         type="radio"
                         value=""
-                        name="returned"
+                        name={`returned.${item._id}`}
                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 "
                         onClick={() => handleOnRadioChange(item, true)}
-                        checked={item.isReturned}
+                        checked={item?.isReturned}
                       />
                       <label
                         for="default-radio-1"
@@ -95,10 +94,10 @@ const History = () => {
                         id="default-radio-2"
                         type="radio"
                         value=""
-                        name="returned"
+                        name={`returned.${item._id}`}
                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 "
                         onClick={() => handleOnRadioChange(item, false)}
-                        checked={!item.isReturned}
+                        checked={!item?.isReturned}
                       />
                       <label
                         for="default-radio-2"
@@ -108,6 +107,14 @@ const History = () => {
                       </label>
                     </div>
                   </>
+                ) : (
+                  <>{item.isReturned === true ? "Returned" : "In Progress"}</>
+                )}
+
+                {user?._id === item.userId && item.isReturned === true && (
+                  <button className="bg-blue-500 shadow-lg rounded text-white p-2">
+                    Review
+                  </button>
                 )}
               </td>
             </tr>

@@ -27,7 +27,7 @@ const CarTable = () => {
       <h1 className="text-center underline mb-5 ">Car -inventory</h1>
 
       <div className="flex justify-center">
-        <div class="relative w-3/4 overflow-x-auto rounded shadow-lg">
+        <div class="relative w-full overflow-x-auto rounded shadow-lg">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 border ">
             <thead class="text-xs text-gray-700 uppercase bg-gray-100 ">
               <tr>

@@ -11,7 +11,7 @@ import { adminAuth, auth } from "../middelware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", upload.single("image"), async (req, res) => {
+router.post("/", auth, adminAuth, upload.single("image"), async (req, res) => {
   try {
     if (req.file) {
       const { Location } = await uploadFile(req.file);
