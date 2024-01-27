@@ -1,14 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { UserLayout } from "../../components/layout/UserLayout";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchBookingHistoryAction,
   returnBookingAction,
 } from "./bookingAction";
+import ReviewForm from "../../components/review/ReviewForm";
+import { setPopupShow } from "../../components/modal/popUpSlice";
+import PopUp from "../../components/modal/PopUp";
 
 const History = () => {
   const { bookings } = useSelector((state) => state.bookingInfo);
   const { user } = useSelector((state) => state.userInfo);
+  const { popupShow } = useSelector((state) => state.popupshow);
+  const [selectedBooking, setSelectedBooking] = useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,8 +34,19 @@ const History = () => {
       dispatch(returnBookingAction(obj));
     }
   };
+
+  const handleOnReviewButton = (bookingItem) => {
+    dispatch(setPopupShow(true));
+    setSelectedBooking(bookingItem);
+  };
+
   return (
     <UserLayout>
+      {popupShow && (
+        <PopUp>
+          <ReviewForm selectedBooking={selectedBooking} />
+        </PopUp>
+      )}
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 border ">
         <thead className="text-xs text-gray-700 uppercase bg-gray-100 ">
           <tr>
@@ -112,7 +128,10 @@ const History = () => {
                 )}
 
                 {user?._id === item.userId && item.isReturned === true && (
-                  <button className="bg-blue-500 shadow-lg rounded text-white p-2">
+                  <button
+                    className="bg-blue-500 shadow-lg rounded text-white p-2"
+                    onClick={() => handleOnReviewButton(item)}
+                  >
                     Review
                   </button>
                 )}

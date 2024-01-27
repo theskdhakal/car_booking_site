@@ -3,6 +3,7 @@ import CustomInput from "../custom-input/CustomInput";
 import { carInputs } from "../input-fields/Inputfields";
 import { updateCarAction } from "../../pages/car-directory/CarAction";
 import { useDispatch, useSelector } from "react-redux";
+import { setPopupShow } from "../modal/popUpSlice";
 
 const EditCarForm = ({ carId }) => {
   const [form, setForm] = useState({});
@@ -52,6 +53,7 @@ const EditCarForm = ({ carId }) => {
     };
 
     dispatch(updateCarAction(formDataWithCarId));
+    dispatch(setPopupShow(false));
   };
 
   return (

@@ -96,6 +96,5 @@ export const carInputs = [
     name: "image",
     type: "file",
     accept: "image/*,video/*",
-    required: true,
   },
 ];
