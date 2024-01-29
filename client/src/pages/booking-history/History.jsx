@@ -13,7 +13,7 @@ const History = () => {
   const { bookings } = useSelector((state) => state.bookingInfo);
   const { user } = useSelector((state) => state.userInfo);
   const { popupShow } = useSelector((state) => state.popupshow);
-  const [selectedBooking, setSelectedBooking] = useState();
+  const [selectedBooking, setSelectedBooking] = useState({});
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -129,7 +129,7 @@ const History = () => {
 
                 {user?._id === item.userId && item.isReturned === true && (
                   <button
-                    className="bg-blue-500 shadow-lg rounded text-white p-2"
+                    className="bg-blue-500 w-3/4 shadow-lg rounded text-white p-2"
                     onClick={() => handleOnReviewButton(item)}
                   >
                     Review
