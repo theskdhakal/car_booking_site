@@ -1,13 +1,20 @@
 import mongoose from "mongoose";
 
-const bookingSchema = new mongoose.Schema(
+const reviewSchema = new mongoose.Schema(
   {
+    bookingId: {
+      type: mongoose.Types.ObjectId,
+      ref: "booking",
+      required: true,
+    },
     carId: {
       type: mongoose.Types.ObjectId,
+      ref: "car",
       required: true,
     },
     carName: {
       type: String,
+      ref: "car",
       required: true,
     },
     userId: {
@@ -19,23 +26,17 @@ const bookingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    userRole: {
-      type: String,
-      required: true,
-    },
-    image: {
-      type: String,
-    },
-    dueDate: {
-      type: Date,
-      required: true,
-    },
-    isReturned: {
-      type: Boolean,
-      default: false,
-    },
     rating: {
       type: Number,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    feedback: {
+      type: String,
+      required: true,
     },
   },
   {
@@ -43,4 +44,4 @@ const bookingSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Booking", bookingSchema); //booking
+export default mongoose.model("Review", reviewSchema); //reviews

@@ -8,6 +8,8 @@ const carAPI = rootAPI + "/api/v1/car";
 
 const bookingAPI = rootAPI + "/api/v1/booking";
 
+const reviewAPI = rootAPI + "/api/v1/review";
+
 const getUserIdFromLocalStorage = () => {
   const str = localStorage.getItem("persist:userInfo");
 
@@ -168,6 +170,25 @@ export const returnBooking = async (obj) => {
 export const fetchBookingHistory = async () => {
   try {
     const resp = await axios.get(bookingAPI, {
+      headers: {
+        Authorization: getUserIdFromLocalStorage(),
+      },
+    });
+
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
+// review
+export const postReview = async (obj) => {
+  console.log(obj);
+  try {
+    const resp = await axios.post(reviewAPI, obj, {
       headers: {
         Authorization: getUserIdFromLocalStorage(),
       },

@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  bookings: [],
+  reviews: [],
 };
 
-const bookingslice = createSlice({
+const reviewslice = createSlice({
   name: "car",
   initialState,
   reducers: {
-    setbookings: (state, { payload }) => {
-      state.bookings = payload;
+    setreviews: (state, { payload }) => {
+      state.reviews = payload;
     },
   },
 });
 
-const { reducer, actions } = bookingslice;
+const { reducer, actions } = reviewslice;
 
-export const { setbookings } = actions;
+export const { setreviews } = actions;
 
 export default reducer;

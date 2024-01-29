@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import CustomInput from "../custom-input/CustomInput";
 
 import { CiStar } from "react-icons/ci";
+import { postReviewAction } from "./ReviewAction";
+import { useDispatch } from "react-redux";
 
 const ReviewForm = ({ selectedBooking }) => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    star: "2",
+    rating: "5",
   });
+
+  const ratings = [1, 2, 3, 4, 5];
 
   const ReviewInputs = [
     {
@@ -33,7 +38,16 @@ const ReviewForm = ({ selectedBooking }) => {
   const handleOnReview = (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    const reviewObj = {
+      bookingId: _id,
+      carId,
+      carName,
+      userId,
+      userName,
+      ...formData,
+    };
+
+    dispatch(postReviewAction(reviewObj));
   };
 
   return (
@@ -45,63 +59,29 @@ const ReviewForm = ({ selectedBooking }) => {
       <form className="border shadow-lg p-3  " onSubmit={handleOnReview}>
         <CustomInput
           label="Title"
-          name="review-title"
+          name="title"
           placeholder="Your review title"
+          required
           onChange={handleOnChange}
         />
 
         <label className="block mt-2">Rating</label>
         <div className="text-lg flex mb-2">
-          <input
-            onChange={handleOnChange}
-            value="1"
-            type="radio"
-            name="star"
-            id="s1"
-          />
-          <label htmlFor="s1">
-            <CiStar />
-          </label>
-          <input
-            onChange={handleOnChange}
-            value="2"
-            type="radio"
-            name="star"
-            id="s2"
-          />
-          <label htmlFor="s2">
-            <CiStar />
-          </label>
-          <input
-            onChange={handleOnChange}
-            value="3"
-            type="radio"
-            name="star"
-            id="s3"
-          />
-          <label htmlFor="s3">
-            <CiStar />
-          </label>
-          <input
-            onChange={handleOnChange}
-            value="4"
-            type="radio"
-            name="star"
-            id="s4"
-          />
-          <label htmlFor="s4">
-            <CiStar />
-          </label>
-          <input
-            onChange={handleOnChange}
-            value="5"
-            type="radio"
-            name="star"
-            id="s5"
-          />
-          <label htmlFor="s5">
-            <CiStar />
-          </label>
+          {ratings.map((rating) => (
+            <>
+              <input
+                onChange={handleOnChange}
+                value={rating.toString()}
+                type="radio"
+                name="rating"
+                id={`s${rating}`}
+                required
+              />
+              <label htmlFor={`s${rating}`}>
+                <CiStar />
+              </label>
+            </>
+          ))}
         </div>
 
         <label className="block mb-2">Feedback</label>
@@ -109,7 +89,7 @@ const ReviewForm = ({ selectedBooking }) => {
           key="1"
           name="feedback"
           type="textarea"
-          required=""
+          required
           className="border border-gray-500 rounded px-3 py-2 w-full"
           placeholder="your feedback"
           rows="3"
