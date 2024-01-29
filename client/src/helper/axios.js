@@ -202,3 +202,16 @@ export const postReview = async (obj) => {
     };
   }
 };
+
+export const getReview = async () => {
+  try {
+    const resp = await axios.get(reviewAPI);
+    console.log(resp.data);
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};

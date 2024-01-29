@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Reviewbox from "../review/Reviewbox";
-import toast from "react-hot-toast";
+
 import { MainLayout } from "../mainLayout/MainLayout";
 import { addNewBookingAction } from "../../pages/booking-history/bookingAction";
+import Rating from "../review/Rating";
 
 const CarLanding = () => {
   const { _id } = useParams();
   const { cars } = useSelector((state) => state.carInfo);
   const { user } = useSelector((state) => state.userInfo);
+  const { reviews } = useSelector((state) => state.reviewInfo);
+
   const selectedCar = cars.find((item) => item._id === _id) || {};
+
   const [bookingDays, setBookingDays] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,6 +25,13 @@ const CarLanding = () => {
   if (!title) {
     return navigate("/");
   }
+
+  const filteredReviews = reviews.filter((item) => item.carId === _id);
+
+  const AverageRating =
+    filteredReviews.reduce((acc, item) => acc + +item.rating, 0) /
+    filteredReviews.length;
+  console.log(AverageRating);
 
   const handleOnChange = (e) => {
     setBookingDays(e.target.value.trim());
@@ -75,7 +87,9 @@ const CarLanding = () => {
                 ${selectedCar?.price}/day
               </p>
               <span className="mx-4">|</span>
-              <p className="font-bold text-amber-500">Rating</p>
+              <p className="font-bold text-amber-500">
+                <Rating num={AverageRating} />
+              </p>
             </div>
 
             {user?._id ? (
@@ -109,7 +123,7 @@ const CarLanding = () => {
                     onClick={handleOnBook}
                     disabled
                   >
-                    Available from :{selectedCar?.dueDate.slice(0, 10)}
+                    Available from :{selectedCar?.dueDate?.slice(0, 10)}
                   </button>
                 )}
               </>
@@ -126,8 +140,10 @@ const CarLanding = () => {
 
         <div className="bottom mt-5">
           <hr className="my-5" />
-          <h1 className="text-2xl font-bold mb-4">Reviews</h1>
-          <Reviewbox />
+          <h1 className="text-2xl font-bold mb-4 ">Reviews</h1>
+          {filteredReviews.map((item, i) => (
+            <Reviewbox key={i} {...item} />
+          ))}
         </div>
       </div>
     </MainLayout>

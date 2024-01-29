@@ -1,15 +1,19 @@
 import React from "react";
+import Rating from "./Rating";
 
-const Reviewbox = () => {
+const Reviewbox = ({ ...item }) => {
+  console.log(item);
   return (
     <div className="shadow-md flex space-x-8 mt-3 py-3 px-1">
       <div className="username rounded-full bg-cyan-200 p-5 flex  items-center">
-        <p>shiva</p>
+        <p>{item?.userName}</p>
       </div>
       <div className="feedback">
-        <h1>nice car</h1>
-        <p>rating</p>
-        <p>its amazing experience</p>
+        <h1>{item?.title}</h1>
+        <p>
+          <Rating num={item?.rating} />
+        </p>
+        <p>{item?.feedback}</p>
       </div>
     </div>
   );

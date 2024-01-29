@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { fetchCarAction } from "./pages/car-directory/CarAction";
 import CarFleet from "./pages/car-directory/CarFleet";
 import CarLanding from "./components/car-component/CarLanding";
+import { fetchReviewAction } from "./components/review/ReviewAction";
 
 // const notify = () => toast("here is your toast");
 
@@ -28,6 +29,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchCarAction());
+    dispatch(fetchReviewAction());
   }, [dispatch]);
 
   return (

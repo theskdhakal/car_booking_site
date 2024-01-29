@@ -5,10 +5,10 @@ const initialState = {
 };
 
 const reviewslice = createSlice({
-  name: "car",
+  name: "reviews",
   initialState,
   reducers: {
-    setreviews: (state, { payload }) => {
+    setReviews: (state, { payload }) => {
       state.reviews = payload;
     },
   },
@@ -16,6 +16,6 @@ const reviewslice = createSlice({
 
 const { reducer, actions } = reviewslice;
 
-export const { setreviews } = actions;
+export const { setReviews } = actions;
 
 export default reducer;

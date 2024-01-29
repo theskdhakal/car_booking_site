@@ -8,12 +8,14 @@ import {
 import ReviewForm from "../../components/review/ReviewForm";
 import { setPopupShow } from "../../components/modal/popUpSlice";
 import PopUp from "../../components/modal/PopUp";
+import Rating from "../../components/review/Rating";
 
 const History = () => {
   const { bookings } = useSelector((state) => state.bookingInfo);
   const { user } = useSelector((state) => state.userInfo);
   const { popupShow } = useSelector((state) => state.popupshow);
   const [selectedBooking, setSelectedBooking] = useState({});
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -128,7 +130,7 @@ const History = () => {
                 )}
 
                 <>
-                  {item?.rating && <p>rating</p>}
+                  {item?.rating && <Rating num={item?.rating} />}
                   {user?._id === item.userId &&
                     item.isReturned === true &&
                     !item?.rating && (
