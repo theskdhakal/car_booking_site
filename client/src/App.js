@@ -19,6 +19,7 @@ import { fetchCarAction } from "./pages/car-directory/CarAction";
 import CarFleet from "./pages/car-directory/CarFleet";
 import CarLanding from "./components/car-component/CarLanding";
 import { fetchReviewAction } from "./components/review/ReviewAction";
+import { Checkout } from "./pages/checkout/Checkout";
 
 // const notify = () => toast("here is your toast");
 
@@ -87,6 +88,14 @@ function App() {
           element={
             <PrivateRoute>
               <CarForm />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute>
+              <Checkout />
             </PrivateRoute>
           }
         />

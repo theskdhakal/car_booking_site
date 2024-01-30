@@ -15,7 +15,7 @@ const CarLanding = () => {
 
   const selectedCar = cars.find((item) => item._id === _id) || {};
 
-  const [bookingDays, setBookingDays] = useState("");
+  const [bookingDays, setBookingDays] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,7 +53,20 @@ const CarLanding = () => {
     };
 
     if (window.confirm("Are you sure you want to book this car")) {
-      dispatch(addNewBookingAction(obj));
+      dispatch(addNewBookingAction(obj))
+        .then((result) => {
+          if (result.status === "success") {
+            // Booking was successful, navigate to success page
+            navigate("/checkout");
+          } else {
+            // Booking failed, handle error if needed
+            console.error("Booking failed:", result.message);
+          }
+        })
+        .catch((error) => {
+          // Handle the error from the action if needed
+          console.error("Booking action failed:", error);
+        });
     }
   };
 

@@ -19,6 +19,8 @@ export const addNewBookingAction = (obj) => async (dispatch) => {
   if (status === "success") {
     dispatch(fetchCarAction());
   }
+
+  return { status, message };
 };
 export const fetchBookingHistoryAction = () => async (dispatch) => {
   const { status, message, bookingHistory } = await fetchBookingHistory();

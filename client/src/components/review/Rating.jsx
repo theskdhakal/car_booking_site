@@ -15,20 +15,19 @@ const Rating = ({ num }) => {
       ? maxRateStar - fullRateStar - 1
       : maxRateStar - fullRateStar;
 
-  const fullStarArray = new Array(fullRateStar).fill("");
-  const noStarArray = new Array(noRateStar).fill("");
+  const fullStarArray = Array.from({ length: fullRateStar }, (_, index) => (
+    <FaStar key={index} />
+  ));
+
+  const noStarArray = Array.from({ length: noRateStar }, (_, index) => (
+    <FaRegStar key={index} />
+  ));
 
   return (
     <div className="flex text-amber-500">
-      {fullStarArray.map(() => (
-        <FaStar />
-      ))}
-
+      {fullStarArray}
       {hasDecimalValue > 0 && <FaStarHalfAlt />}
-
-      {noStarArray.map(() => (
-        <FaRegStar />
-      ))}
+      {noStarArray}
     </div>
   );
 };

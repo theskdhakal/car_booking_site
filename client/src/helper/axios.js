@@ -10,6 +10,8 @@ const bookingAPI = rootAPI + "/api/v1/booking";
 
 const reviewAPI = rootAPI + "/api/v1/review";
 
+const paymentAPI = rootAPI + "/api/v1/payment";
+
 const getUserIdFromLocalStorage = () => {
   const str = localStorage.getItem("persist:userInfo");
 
@@ -184,7 +186,7 @@ export const fetchBookingHistory = async () => {
   }
 };
 
-// review
+// ******************review*********************
 export const postReview = async (obj) => {
   console.log(obj);
   try {
@@ -206,6 +208,25 @@ export const postReview = async (obj) => {
 export const getReview = async () => {
   try {
     const resp = await axios.get(reviewAPI);
+    console.log(resp.data);
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
+// *****************payment***************************
+
+export const postPayment = async (paymentObj) => {
+  console.log(paymentObj);
+  try {
+    const resp = await axios.post(
+      paymentAPI + "/create-payment-intent",
+      paymentObj
+    );
     console.log(resp.data);
     return resp.data;
   } catch (error) {

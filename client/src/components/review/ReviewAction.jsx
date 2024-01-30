@@ -5,7 +5,7 @@ import { setPopupShow } from "../modal/popUpSlice";
 import { setReviews } from "./reviewSlice";
 
 export const postReviewAction = (obj) => async (dispatch) => {
-  const { status, message, reviews } = await postReview(obj);
+  const { status, message } = await postReview(obj);
 
   toast[status](message);
 
@@ -17,6 +17,6 @@ export const postReviewAction = (obj) => async (dispatch) => {
 };
 
 export const fetchReviewAction = () => async (dispatch) => {
-  const { status, message, reviews } = await getReview();
+  const { reviews } = await getReview();
   dispatch(setReviews(reviews));
 };
