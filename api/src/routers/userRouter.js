@@ -1,17 +1,25 @@
 import express from "express";
-import { getUserByEmail, insertUser } from "../models/user/UserModel.js";
+import {
+  getAllUsers,
+  getUserByEmail,
+  insertUser,
+} from "../models/user/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
+import { adminAuth, auth } from "../middelware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", auth, adminAuth, async (req, res) => {
   try {
-    console.log(req.body);
+    const users = await getAllUsers();
 
-    res.json({
-      status: "success",
-      message: "Here are the user informations",
-    });
+    if (users) {
+      res.json({
+        status: "success",
+        message: "Here are the user informations",
+        users,
+      });
+    }
   } catch (error) {
     console.log(error);
   }

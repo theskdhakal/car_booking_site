@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
       if (update?._id) {
         return res.json({
           status: "success",
-          message: "Your car has been booked",
+          message: "Redirecting to Checkout",
         });
       }
     }

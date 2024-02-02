@@ -6,6 +6,7 @@ import Reviewbox from "../review/Reviewbox";
 import { MainLayout } from "../mainLayout/MainLayout";
 import { addNewBookingAction } from "../../pages/booking-history/bookingAction";
 import Rating from "../review/Rating";
+import { setPayment } from "../../pages/checkout/paymentSlice";
 
 const CarLanding = () => {
   const { _id } = useParams();
@@ -57,7 +58,9 @@ const CarLanding = () => {
         .then((result) => {
           if (result.status === "success") {
             // Booking was successful, navigate to success page
+
             navigate("/checkout");
+            dispatch(setPayment(selectedCar?.price));
           } else {
             // Booking failed, handle error if needed
             console.error("Booking failed:", result.message);

@@ -20,6 +20,7 @@ import CarFleet from "./pages/car-directory/CarFleet";
 import CarLanding from "./components/car-component/CarLanding";
 import { fetchReviewAction } from "./components/review/ReviewAction";
 import { Checkout } from "./pages/checkout/Checkout";
+import { getAllUserAction } from "./pages/signup-signIn/userAction";
 
 // const notify = () => toast("here is your toast");
 
@@ -31,6 +32,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchCarAction());
     dispatch(fetchReviewAction());
+    dispatch(getAllUserAction());
   }, [dispatch]);
 
   return (

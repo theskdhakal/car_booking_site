@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { AiFillLock } from "react-icons/ai";
-import { useDispatch } from "react-redux";
 import {
   PaymentElement,
   useElements,
@@ -8,6 +7,8 @@ import {
 } from "@stripe/react-stripe-js";
 
 import { postPayment } from "../../helper/axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export const CheckOutForm = () => {
   const [form, setForm] = useState();
@@ -19,7 +20,7 @@ export const CheckOutForm = () => {
     if (!stripe) return;
   }, []);
 
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -57,9 +58,13 @@ export const CheckOutForm = () => {
     });
 
     if (paymentIntent?.status === "succeeded") {
-      alert("success");
+      toast.success("Your booking has been completed");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } else {
-      alert("payment unsucessful");
+      toast.error("Payment Error !");
     }
   };
 

@@ -31,7 +31,7 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/car", carRouter);
 app.use("/api/v1/booking", auth, bookingRouter);
 app.use("/api/v1/review", reviewRouter);
-app.use("/api/v1/payment", paymentRouter);
+app.use("/api/v1/payment", auth, paymentRouter);
 
 // server
 app.use("/", (req, res) => {

@@ -58,6 +58,23 @@ export const loginUser = async (userData) => {
   }
 };
 
+export const getAllUsers = async () => {
+  try {
+    const resp = await axios.get(userAPI, {
+      headers: {
+        Authorization: getUserIdFromLocalStorage(),
+      },
+    });
+
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
 // **************car****************
 export const postCar = async (obj) => {
   console.log(obj);
@@ -221,13 +238,17 @@ export const getReview = async () => {
 // *****************payment***************************
 
 export const postPayment = async (paymentObj) => {
-  console.log(paymentObj);
   try {
     const resp = await axios.post(
       paymentAPI + "/create-payment-intent",
-      paymentObj
+      paymentObj,
+      {
+        headers: {
+          Authorization: getUserIdFromLocalStorage(),
+        },
+      }
     );
-    console.log(resp.data);
+
     return resp.data;
   } catch (error) {
     return {

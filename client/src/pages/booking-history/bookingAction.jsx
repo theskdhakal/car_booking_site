@@ -7,6 +7,7 @@ import {
 
 import { fetchCarAction } from "../car-directory/CarAction";
 import { setbookings } from "./bookingSlice";
+import { setpayment } from "../checkout/paymentSlice";
 
 // *********booking section *****************
 export const addNewBookingAction = (obj) => async (dispatch) => {

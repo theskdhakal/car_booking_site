@@ -7,8 +7,6 @@ export const Checkout = () => {
   const publishableKey = process.env.REACT_APP_STRIPE_PK;
   const stripePromise = loadStripe(publishableKey);
 
-  console.log(publishableKey);
-
   const options = {
     mode: "payment",
     currency: "aud",

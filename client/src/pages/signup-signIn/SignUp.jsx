@@ -39,7 +39,7 @@ const SignUp = () => {
   return (
     <MainLayout>
       <div className="grid min-h-screen place-items-center p-3">
-        <div className=" p-12 rounded border shadow-lg bg-white   sm:w-2/3 md:w-1/2 lg:w-1/4">
+        <div className=" p-12 rounded border shadow-lg bg-white   sm:w-2/3 md:w-1/2 lg:w-1/2">
           <h1 className="text-center">Add New User</h1>
           <hr />
           <form onSubmit={handleOnSubmit}>
