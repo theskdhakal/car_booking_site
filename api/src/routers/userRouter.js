@@ -3,6 +3,7 @@ import {
   getAllUsers,
   getUserByEmail,
   insertUser,
+  updateUserProfile,
 } from "../models/user/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import { adminAuth, auth } from "../middelware/authMiddleware.js";
@@ -96,6 +97,40 @@ router.post("/signin", async (req, res) => {
     res.json({
       status: "error",
       message: error.message,
+    });
+  }
+});
+
+router.patch("/", auth, async (req, res) => {
+  try {
+    const { authorization } = req.headers;
+    const _id = authorization;
+
+    console.log(authorization);
+    const updatedUser = await updateUserProfile(_id, req.body);
+
+    console.log(updatedUser);
+
+    updatedUser
+      ? res.json({
+          status: "success",
+          message: "Your Profile",
+          updatedUser,
+        })
+      : res.json({
+          status: "error",
+          message: "unable to update your profile, please try again later",
+        });
+  } catch (error) {
+    let msg = error.message;
+
+    if (msg.includes("E11000 duplicate key error")) {
+      msg = "Email is already in Use";
+    }
+
+    res.json({
+      status: "error",
+      message: msg,
     });
   }
 });

@@ -75,6 +75,23 @@ export const getAllUsers = async () => {
   }
 };
 
+export const updateUser = async (data) => {
+  try {
+    const resp = await axios.patch(userAPI, data, {
+      headers: {
+        Authorization: getUserIdFromLocalStorage(),
+      },
+    });
+
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
 // **************car****************
 export const postCar = async (obj) => {
   console.log(obj);
