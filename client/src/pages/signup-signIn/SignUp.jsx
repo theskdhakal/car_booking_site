@@ -4,10 +4,16 @@ import { signUpInputs } from "../../components/input-fields/Inputfields";
 import CustomInput from "../../components/custom-input/CustomInput";
 import { postUser } from "../../helper/axios";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setPopupShow } from "../../components/modal/popUpSlice";
+import Redirect from "./Redirect";
+import PopUp from "../../components/modal/PopUp";
 
 const SignUp = () => {
   const [form, setForm] = useState();
+  const { popupShow } = useSelector((state) => state.popupshow);
+  const dispatch = useDispatch();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -34,10 +40,19 @@ const SignUp = () => {
     const data = await dataPromise;
     const { status, message } = data;
     toast[status](message);
+
+    if (status === "success") {
+      dispatch(setPopupShow(true));
+    }
   };
 
   return (
     <MainLayout>
+      {popupShow && (
+        <PopUp>
+          <Redirect />
+        </PopUp>
+      )}
       <div className="grid min-h-screen place-items-center p-3">
         <div className=" p-12 rounded border shadow-lg bg-white   sm:w-2/3 md:w-1/2 lg:w-1/2">
           <h1 className="text-center">Add New User</h1>

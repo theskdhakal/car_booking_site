@@ -2,6 +2,7 @@ import express from "express";
 import {
   getAllUsers,
   getUserByEmail,
+  getUserByEmailandCode,
   insertUser,
   updateUserProfile,
 } from "../models/user/UserModel.js";
@@ -34,14 +35,17 @@ router.post("/", async (req, res) => {
 
     req.body.password = hashPassword(password);
 
-    const user = await insertUser(req.body);
+    const uuid = v4();
+
+    const newUser = { ...req.body, verificationCode: uuid };
+
+    const user = await insertUser(newUser);
     console.log(user);
 
     //send account verification email
 
-    const uuid = v4();
     if (user?._id) {
-      const link = `${process.env.WEB_DOMAIN}user-verification?c=${uuid}&&e=${user.email}`;
+      const link = `${process.env.WEB_DOMAIN}user-verification?c=${user.verificationCode}&&e=${user.email}`;
       const status = await accountVerificationEmail(user, link);
       res.json({
         status: "success",
@@ -69,6 +73,37 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/user-verification", async (req, res) => {
+  try {
+    const { c, e } = req.query;
+
+    console.log(c, e);
+
+    //validate verification code and email
+
+    const user = await getUserByEmailandCode({ email: e, verificationCode: c });
+
+    if (user) {
+      await updateUserProfile(user._id, { isVerified: true });
+
+      return res.json({
+        status: "success",
+        message: "Account verified Successful, redirecting to dashboard",
+      });
+    } else {
+      return res.json({
+        status: "error",
+        message: "Unable to verify account",
+      });
+    }
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+});
+
 router.post("/signin", async (req, res) => {
   console.log(req.body);
   try {
@@ -84,6 +119,13 @@ router.post("/signin", async (req, res) => {
       return res.json({
         status: "error",
         message: "User not found",
+      });
+    }
+
+    if (!user.isVerified) {
+      return res.json({
+        status: "error",
+        message: "Account not verified",
       });
     }
 

@@ -92,6 +92,22 @@ export const updateUser = async (data) => {
   }
 };
 
+export const verifyUser = async (verifiedCode, email) => {
+  console.log(verifiedCode, email);
+  try {
+    const resp = await axios.get(
+      userAPI + `/user-verification?c=${verifiedCode}&&e=${email}`
+    );
+
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
 // **************car****************
 export const postCar = async (obj) => {
   console.log(obj);

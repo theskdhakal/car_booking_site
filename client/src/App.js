@@ -21,6 +21,8 @@ import CarLanding from "./components/car-component/CarLanding";
 import { fetchReviewAction } from "./components/review/ReviewAction";
 import { Checkout } from "./pages/checkout/Checkout";
 import { getAllUserAction } from "./pages/signup-signIn/userAction";
+import Redirect from "./pages/signup-signIn/Redirect";
+import UserVerification from "./components/user-verification/UserVerification";
 
 // const notify = () => toast("here is your toast");
 
@@ -43,6 +45,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/fleet" element={<CarFleet />} />
         <Route path="/cars/:_id" element={<CarLanding />} />
+        <Route path="/user-verification" element={<UserVerification />} />
 
         {/* *****************private Routes ********************** */}
         <Route

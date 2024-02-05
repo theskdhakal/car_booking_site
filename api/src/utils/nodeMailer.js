@@ -28,7 +28,7 @@ export const accountVerificationEmail = async (user, link) => {
     text: "Hello ?" + fName + "follow the link to activate your account" + link,
     html: `
       <p>
-      Hello ${fName.toUpperCase()}${lName.toUpperCase()}
+      Hello ${fName.toUpperCase()}${" "}${lName.toUpperCase()}
       </p>
 
       <p>
@@ -78,21 +78,21 @@ export const bookingConfirmationEmail = async (user, result) => {
     from: `"CarQuest" <${process.env.EMAIL_USER}>`, //sender address
     to: email, // list of receivers
     subject: "Booking received", //subject line
-    text: `Dear" + fName + "We have received your order. Your Order ID is: ${result?._id}`,
+    text: `Dear" + fName + "We have received your booking . Your booking ID is: ${result?._id}`,
     html: `
       <p>
-      Dear ${fName.toUpperCase()}${lName.toUpperCase()}
+      Dear ${fName.toUpperCase()} ${" "}${lName.toUpperCase()}
       </p>
 
       <p>
-      We have received your order.
+      We have received your booking.
       </p>
 
       <br/>
       <br/>
 
       <p>
-    Your Order ID is : ${result?._id}
+    Your booking ID is : ${result?._id}
       </p>
 
       <br/>

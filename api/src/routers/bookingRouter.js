@@ -6,6 +6,7 @@ import {
   updateBooking,
 } from "../models/booking/BookingModel.js";
 import { updateCars } from "../models/car/CarModel.js";
+import { bookingConfirmationEmail } from "../utils/nodeMailer.js";
 
 const router = express.Router();
 
@@ -19,12 +20,15 @@ router.post("/", async (req, res) => {
 
     req.body.dueDate = dueDate;
 
+    const user = req.body.userInfo;
+
     //create new booking details in db
     const result = await addBooking(req.body);
 
     if (result?._id) {
       //make car not available and give due Date
 
+      await bookingConfirmationEmail(user, result);
       const update = await updateCars(req.body.carId, {
         isAvailable: false,
         dueDate,
