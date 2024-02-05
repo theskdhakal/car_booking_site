@@ -17,5 +17,5 @@ export const getAllUsers = () => {
 };
 
 export const updateUserProfile = (_id, updateData) => {
-  return UserSchema.findByIdAndUpdate(_id, updateData);
+  return UserSchema.findByIdAndUpdate(_id, updateData, { new: true });
 };

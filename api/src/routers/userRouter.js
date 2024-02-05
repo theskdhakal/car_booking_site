@@ -7,6 +7,8 @@ import {
 } from "../models/user/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import { adminAuth, auth } from "../middelware/authMiddleware.js";
+import { v4 } from "uuid";
+import { accountVerificationEmail } from "../utils/nodeMailer.js";
 
 const router = express.Router();
 
@@ -33,18 +35,28 @@ router.post("/", async (req, res) => {
     req.body.password = hashPassword(password);
 
     const user = await insertUser(req.body);
+    console.log(user);
 
-    user?._id
-      ? res.json({
-          status: "success",
-          message: "New user has been created successfully",
-        })
-      : res.json({
-          status: "error",
-          message: "unable to create user, please try again later",
-        });
+    //send account verification email
+
+    const uuid = v4();
+    if (user?._id) {
+      const link = `${process.env.WEB_DOMAIN}user-verification?c=${uuid}&&e=${user.email}`;
+      const status = await accountVerificationEmail(user, link);
+      res.json({
+        status: "success",
+        message: "New user has been created successfully",
+      });
+      return;
+    }
+
+    res.json({
+      status: "error",
+      message: "unable to create user, please try again later",
+    });
   } catch (error) {
     let msg = error.message;
+    console.log(msg);
 
     if (msg.includes("E11000 duplicate key error")) {
       msg = "Email is already in Use";
@@ -106,9 +118,7 @@ router.patch("/", auth, async (req, res) => {
     const { authorization } = req.headers;
     const _id = authorization;
 
-    console.log(authorization);
     const updatedUser = await updateUserProfile(_id, req.body);
-
     console.log(updatedUser);
 
     updatedUser

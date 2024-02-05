@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UserLayout } from "../../components/layout/UserLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpInputs } from "../../components/input-fields/Inputfields";
@@ -8,6 +8,8 @@ import { updateUserProfileAction } from "../signup-signIn/userAction";
 
 const UserProfile = () => {
   const { user } = useSelector((state) => state.userInfo);
+  console.log(user);
+
   const [form, setForm] = useState();
   const dispatch = useDispatch();
 
@@ -16,6 +18,10 @@ const UserProfile = () => {
 
     setForm({ ...form, [name]: value });
   };
+
+  useEffect(() => {
+    setForm(user);
+  }, [user]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -48,6 +54,7 @@ const UserProfile = () => {
                     key={i}
                     {...item}
                     className="mb-2 "
+                    value={form ? form[item?.name] : "default"}
                     onChange={handleOnChange}
                   />
                 ))}

@@ -36,7 +36,6 @@ router.post("/", auth, async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const reviews = await getReviews();
-    console.log(reviews);
 
     if (reviews) {
       return res.json({
