@@ -9,7 +9,11 @@ import {
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import { adminAuth, auth } from "../middelware/authMiddleware.js";
 import { v4 } from "uuid";
-import { accountVerificationEmail } from "../utils/nodeMailer.js";
+import {
+  accountVerificationEmail,
+  sendPasswordResetLink,
+} from "../utils/nodeMailer.js";
+import { insertToken } from "../models/session/PwdResetModel.js";
 
 const router = express.Router();
 
@@ -88,7 +92,7 @@ router.get("/user-verification", async (req, res) => {
 
       return res.json({
         status: "success",
-        message: "Account verified Successful, redirecting to dashboard",
+        message: "Account verified Successful",
       });
     } else {
       return res.json({
@@ -183,6 +187,48 @@ router.patch("/", auth, async (req, res) => {
     res.json({
       status: "error",
       message: msg,
+    });
+  }
+});
+
+router.post("/pwdReset", async (req, res) => {
+  try {
+    const { email, fName } = req.body;
+
+    const uuid = v4();
+
+    const isUserAvailable = await getUserByEmail(email);
+
+    if (!isUserAvailable) {
+      res.json({
+        status: "error",
+        message: "User not found with this email",
+      });
+      return;
+    }
+
+    const newUser = { email, fName, resetToken: uuid };
+
+    const user = await insertToken(newUser);
+
+    if (user?._id) {
+      const link = `${process.env.WEB_DOMAIN}pwdReset?c=${user.resetToken}&&e=${user.email}`;
+      const status = await sendPasswordResetLink(user, link);
+      res.json({
+        status: "success",
+        message: "Password reset link sent. Please Check Your email...",
+      });
+      return;
+    }
+
+    res.json({
+      status: "error",
+      message: "unable to reset password, please try again later",
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
     });
   }
 });

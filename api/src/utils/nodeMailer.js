@@ -134,7 +134,7 @@ export const sendPasswordResetLink = async (user, link) => {
     text: `Hello ${fName}`,
     html: `
       <p>
-    You are receiving this email because a password reset request was initiated for your account.
+  Hello ${fName} 
       </p>
       <p>
     If you did not request this, please disregard this email.

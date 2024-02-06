@@ -29,7 +29,7 @@ const UserVerification = () => {
   console.log(verifiactionStatus);
 
   return (
-    <div>
+    <div className="flex flex-col  justify-center items-center h-screen">
       <h1>{verifiactionStatus}</h1>
       <br />
       <p>

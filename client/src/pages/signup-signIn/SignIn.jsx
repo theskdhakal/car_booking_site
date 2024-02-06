@@ -5,12 +5,15 @@ import { signInInputs } from "../../components/input-fields/Inputfields";
 import { signInAction } from "./userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { setPopupShow } from "../../components/modal/popUpSlice";
+import PopUp from "../../components/modal/PopUp";
+import PwdReset from "./PwdReset";
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({});
   const navigate = useNavigate();
-
+  const { popupShow } = useSelector((state) => state.popupshow);
   const { user } = useSelector((state) => state.userInfo);
 
   useEffect(() => {
@@ -31,8 +34,18 @@ const SignIn = () => {
 
     dispatch(signInAction(form));
   };
+
+  const handleOnResetPwd = () => {
+    dispatch(setPopupShow(true));
+  };
   return (
     <MainLayout>
+      {popupShow && (
+        <PopUp>
+          <PwdReset />
+        </PopUp>
+      )}
+
       <div className="grid min-h-screen place-items-center p-3">
         <div className=" p-12 rounded border shadow-lg bg-white   sm:w-2/3 md:w-1/2 lg:w-1/2">
           <h1 className="text-center">Welcome Back</h1>
@@ -51,13 +64,23 @@ const SignIn = () => {
               </button>
             </div>
           </form>
-
-          <div className="text-end text-sm">
-            Don't have account? <br />
-            <Link to="/signup" className="text-blue-500 underline">
-              signup{" "}
-            </Link>
-            here
+          <div className="flex justify-between">
+            <div className=" text-sm">
+              <h5
+                className="text-blue-500 underline cursor-pointer"
+                onClick={() => handleOnResetPwd()}
+              >
+                Reset Password{" "}
+              </h5>
+            </div>
+            <div className="text-end text-sm">
+              Don't have account? <br />
+              <Link to="/signup" className="text-blue-500 underline">
+                signup{" "}
+              </Link>
+              here
+              <br />
+            </div>
           </div>
         </div>
       </div>

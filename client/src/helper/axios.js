@@ -108,6 +108,19 @@ export const verifyUser = async (verifiedCode, email) => {
   }
 };
 
+export const pwdReset = async (email) => {
+  try {
+    const resp = await axios.post(userAPI + "/pwdReset", email);
+
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
 // **************car****************
 export const postCar = async (obj) => {
   console.log(obj);

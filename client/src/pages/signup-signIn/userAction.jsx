@@ -1,4 +1,9 @@
-import { getAllUsers, loginUser, updateUser } from "../../helper/axios";
+import {
+  getAllUsers,
+  loginUser,
+  pwdReset,
+  updateUser,
+} from "../../helper/axios";
 import toast from "react-hot-toast";
 import { setUser, setUsers } from "./userSlice";
 
@@ -24,4 +29,9 @@ export const updateUserProfileAction = (data) => async (dispatch) => {
     dispatch(getAllUserAction());
     dispatch(setUser(updatedUser));
   }
+};
+
+export const pwdResetAction = async (email) => {
+  const result = await pwdReset(email);
+  return result;
 };
