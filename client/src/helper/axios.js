@@ -92,13 +92,12 @@ export const updateUser = async (data) => {
   }
 };
 
-export const verifyUser = async (verifiedCode, email) => {
-  console.log(verifiedCode, email);
+export const verifyUser = async (verifiedCode, email, mode) => {
   try {
     const resp = await axios.get(
-      userAPI + `/user-verification?c=${verifiedCode}&&e=${email}`
+      userAPI + `/verify?c=${verifiedCode}&&e=${email}&&mode=${mode}`
     );
-
+    console.log(resp.data);
     return resp.data;
   } catch (error) {
     return {
@@ -294,7 +293,7 @@ export const postPayment = async (paymentObj) => {
         },
       }
     );
-
+    console.log("why", resp.data);
     return resp.data;
   } catch (error) {
     return {

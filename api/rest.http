@@ -1,70 +1,70 @@
 
-@rootApi=http://localhost:8000
+# @rootApi=http://localhost:8000
 
 
 
-@userApi={{rootApi}}/api/v1/user: 
-@carApi={{rootApi}}/api/v1/car
+# @userApi={{rootApi}}/api/v1/user: 
+# @carApi={{rootApi}}/api/v1/car
 
-@bookingApi={{rootApi}}/api/v1/booking
+# @bookingApi={{rootApi}}/api/v1/booking
 
-### server testing
-GET {{rootApi}}
-
-
-# ========== user api =============
-###get user 
-
-GET {{userApi}}
-Content-Type: application/json
-
-{
-    "fName":"Sam",
-    "lName":"Smith",
-    "phone":"01236544778",
-    "address":"somewhere in the Sydney",
-    "email":"sam@emaiul",
-    "password":"123456"
-}
+# ### server testing
+# GET {{rootApi}}
 
 
+# # ========== user api =============
+# ###get user 
 
-#####
-GET {{carApi}}
-Authorization:659627fb185beb54110683fe
+# GET {{userApi}}
+# Content-Type: application/json
 
-
-###create user in db
-
-POST {{userApi}}
-Content-Type: application/json
-
-{
-    "role":"admin",
-    "fName":"Sam",
-    "lName":"Smith",
-    "phone":"01236544778",
-    "address":"somewhere in the Sydney",
-    "email":"sam@emaiul.com",
-    "password":"123456"
-}
+# {
+#     "fName":"Sam",
+#     "lName":"Smith",
+#     "phone":"01236544778",
+#     "address":"somewhere in the Sydney",
+#     "email":"sam@emaiul",
+#     "password":"123456"
+# }
 
 
 
-# ==================== Booking Api 
-###=====create booking record
-POST {{bookingApi}}
-Content-Type: application/json
+# #####
+# GET {{carApi}}
+# Authorization:659627fb185beb54110683fe
 
-{
-    "carId":"hagfsd4646",
-    "carName":"BMW",
-    "image":"http//:....",
-    "userId":"sadfg4545",
-    "userName":"sdfgdsg",
-    "returnDate":"2024-1-22"
-}
 
-###
-GET {{bookingApi}}
-Authorization:659627fb185beb54110683fe
+# # ###create user in db
+
+# # POST {{userApi}}
+# # Content-Type: application/json
+
+# # {
+# #     "role":"admin",
+# #     "fName":"Sam",
+# #     "lName":"Smith",
+# #     "phone":"01236544778",
+# #     "address":"somewhere in the Sydney",
+# #     "email":"sam@emaiul.com",
+# #     "password":"123456"
+# # }
+
+
+
+# # ==================== Booking Api 
+# ###=====create booking record
+# POST {{bookingApi}}
+# Content-Type: application/json
+
+# {
+#     "carId":"hagfsd4646",
+#     "carName":"BMW",
+#     "image":"http//:....",
+#     "userId":"sadfg4545",
+#     "userName":"sdfgdsg",
+#     "returnDate":"2024-1-22"
+# }
+
+# ###
+# GET {{bookingApi}}
+# Authorization:659627fb185beb54110683fe

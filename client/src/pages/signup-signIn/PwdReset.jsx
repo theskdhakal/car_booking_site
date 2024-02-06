@@ -61,7 +61,7 @@ const PwdReset = () => {
           </div>
         </>
       ) : (
-        <div className="flex justify-center ">
+        <div className="flex justify-center align-items-center">
           <h1>{msg}</h1>
         </div>
       )}

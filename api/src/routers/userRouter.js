@@ -13,7 +13,10 @@ import {
   accountVerificationEmail,
   sendPasswordResetLink,
 } from "../utils/nodeMailer.js";
-import { insertToken } from "../models/session/PwdResetModel.js";
+import {
+  getUserByPwdResetCode,
+  insertToken,
+} from "../models/session/PwdResetModel.js";
 
 const router = express.Router();
 
@@ -49,7 +52,7 @@ router.post("/", async (req, res) => {
     //send account verification email
 
     if (user?._id) {
-      const link = `${process.env.WEB_DOMAIN}user-verification?c=${user.verificationCode}&&e=${user.email}`;
+      const link = `${process.env.WEB_DOMAIN}verify?c=${user.verificationCode}&&e=${user.email}&&mode=userVerification`;
       const status = await accountVerificationEmail(user, link);
       res.json({
         status: "success",
@@ -77,15 +80,26 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/user-verification", async (req, res) => {
+router.get("/verify", async (req, res) => {
   try {
-    const { c, e } = req.query;
+    const { c, e, mode } = req.query;
 
-    console.log(c, e);
+    let user;
 
     //validate verification code and email
+    if (mode === "user-verification") {
+      user = await getUserByEmailandCode({
+        email: e,
+        verificationCode: c,
+      });
+    }
 
-    const user = await getUserByEmailandCode({ email: e, verificationCode: c });
+    if (mode === "pwdReset") {
+      user = await getUserByPwdResetCode({
+        email: e,
+        resetToken: c,
+      });
+    }
 
     if (user) {
       await updateUserProfile(user._id, { isVerified: true });
@@ -93,6 +107,7 @@ router.get("/user-verification", async (req, res) => {
       return res.json({
         status: "success",
         message: "Account verified Successful",
+        context: mode === "pwdReset" ? "pwdReset" : "user-verification",
       });
     } else {
       return res.json({
@@ -212,7 +227,7 @@ router.post("/pwdReset", async (req, res) => {
     const user = await insertToken(newUser);
 
     if (user?._id) {
-      const link = `${process.env.WEB_DOMAIN}pwdReset?c=${user.resetToken}&&e=${user.email}`;
+      const link = `${process.env.WEB_DOMAIN}verify?c=${user.resetToken}&&e=${user.email}&&mode=pwdReset`;
       const status = await sendPasswordResetLink(user, link);
       res.json({
         status: "success",

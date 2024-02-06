@@ -45,7 +45,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/fleet" element={<CarFleet />} />
         <Route path="/cars/:_id" element={<CarLanding />} />
-        <Route path="/user-verification" element={<UserVerification />} />
+        <Route path="/verify" element={<UserVerification />} />
 
         {/* *****************private Routes ********************** */}
         <Route
