@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const rootAPI = "http://localhost:8000";
+const rootAPI =
+  process.env.NODE_ENV === "production" ? "" : "http://localhost:8000";
 
 const userAPI = rootAPI + "/api/v1/user";
 

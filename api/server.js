@@ -4,6 +4,7 @@ dotenv.config();
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import path from "path";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -33,12 +34,12 @@ app.use("/api/v1/booking", auth, bookingRouter);
 app.use("/api/v1/review", reviewRouter);
 app.use("/api/v1/payment", auth, paymentRouter);
 
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/client/build")));
+
 // server
 app.use("/", (req, res) => {
-  res.json({
-    status: "success",
-    message: "Server running",
-  });
+  res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
 
 app.listen(PORT, (error) => {
