@@ -20,7 +20,7 @@ const CustomCard = ({ image, _id, title, price }) => {
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
         <div>
           <img
-            className="p-2 rounded-t-lg h-72"
+            className="p-2 rounded-t-lg h-auto"
             src={image}
             alt="product image"
           />

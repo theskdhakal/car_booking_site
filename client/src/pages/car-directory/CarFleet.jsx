@@ -49,7 +49,12 @@ const CarFleet = () => {
 
         <hr />
 
-        <div className="flex flex-wrap space-x-8 mt-5 space-y-8 ">
+        {/* <div className="flex flex-wrap  mt-5  ">
+          {display.map((item) => (
+            <CustomCard key={item._id} {...item} />
+          ))}
+        </div> */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-5">
           {display.map((item) => (
             <CustomCard key={item._id} {...item} />
           ))}

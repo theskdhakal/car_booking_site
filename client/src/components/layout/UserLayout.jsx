@@ -12,7 +12,7 @@ import { useMediaQuery } from "react-responsive";
 export const UserLayout = ({ children }) => {
   const { user } = useSelector((state) => state.userInfo);
 
-  const [sidemenu, setSidemenu] = useState(true);
+  const [sidemenu, setSidemenu] = useState(false);
   const dispatch = useDispatch();
 
   const handleOnClick = () => {
@@ -35,7 +35,7 @@ export const UserLayout = ({ children }) => {
       <Header />
       <div className="flex">
         {sidemenu && (
-          <div className="left-menu bg-primary text-white  w-1/2 lg:w-1/6 z-5">
+          <div className="left-menu bg-primary text-white  w-3/4 lg:w-1/6 z-5">
             <h4 className="text-center">{user?.role?.toUpperCase()}</h4>
             <hr />
             <ul className=" flex flex-col items-start mt-5  pl-10 space-y-5">

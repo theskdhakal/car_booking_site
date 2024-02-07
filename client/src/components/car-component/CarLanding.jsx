@@ -16,7 +16,7 @@ const CarLanding = () => {
 
   const selectedCar = cars.find((item) => item._id === _id) || {};
 
-  const [bookingDays, setBookingDays] = useState([]);
+  const [bookingDays, setBookingDays] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,6 +42,7 @@ const CarLanding = () => {
     if (!bookingDays) {
       return window.alert("Please provide valid booking days");
     }
+    console.log(bookingDays);
 
     const obj = {
       carId: _id,
