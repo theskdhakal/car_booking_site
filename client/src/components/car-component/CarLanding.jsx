@@ -88,7 +88,7 @@ const CarLanding = () => {
           <span className="text-gray-500"> &gt; </span>
           <span className="text-gray-700">{selectedCar?.title}</span>
         </div>
-        <div className="middle mt-5 flex space-x-8">
+        <div className="middle mt-5  space-y-5 sm:space-x-8">
           <div className="left">
             <img
               src={selectedCar?.image}
