@@ -125,7 +125,7 @@ const Home = () => {
         <Slider slides={slides} />
       </div>
 
-      <div className="home-last flex bg-black">
+      <div className="home-last flex flex-col sm:flex-row bg-black">
         <div className="image p-3 ">
           <img src={multiple} />
         </div>
