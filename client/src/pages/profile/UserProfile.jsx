@@ -32,23 +32,22 @@ const UserProfile = () => {
     <UserLayout>
       <div className=" w-full lg:h-screen ">
         <div className="w-full mx-0 lg:mx-auto lg:p-5 shadow-lg rounded-lg">
-          <div className="lg:flex mt-4 space-x-8">
+          <div className="lg:flex mt-4 sm:space-x-8">
             <div className="w-full lg:w-1/4  mt-2">
               <img
                 src={userimg}
                 alt="Profile Image"
                 className="w-full rounded"
-                // style={{ height: isMobile ? "250px" : "550px" }}
                 style={{ height: "450px" }}
               />
             </div>
 
-            <div className="w-full p-0 mt-5 lg:w-3/4 lg:pl-4">
+            <div className="w-full p-3 mt-5 lg:w-3/4  ">
               <h5 className="text-center text-xl font-semibold mb-4">
                 Update Your Profile Information
               </h5>
               <hr />
-              <form onSubmit={handleOnSubmit} className="p-2">
+              <form onSubmit={handleOnSubmit} className="p-">
                 {signUpInputs.slice(0, 4).map((item, i) => (
                   <CustomInput
                     key={i}

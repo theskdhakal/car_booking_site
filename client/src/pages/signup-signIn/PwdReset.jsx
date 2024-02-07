@@ -44,7 +44,7 @@ const PwdReset = () => {
     }
   };
   return (
-    <div style={{ height: "30vh" }}>
+    <div>
       {show ? (
         <>
           <h1 className="my-3 text-center">Password Reset Form</h1>
@@ -54,7 +54,7 @@ const PwdReset = () => {
                 <CustomInput key={i} {...item} onChange={handleOnChange} />
               ))}
 
-              <button className="bg-blue-500 rounded mt-5 p-2 w-full">
+              <button className="bg-blue-500 rounded mt-5 mb-2 p-2 w-full">
                 Send Password Reset Link
               </button>
             </form>
