@@ -9,6 +9,8 @@ import { MainLayout } from "../../components/mainLayout/MainLayout";
 const CarFleet = () => {
   const { cars } = useSelector((state) => state.carInfo);
 
+  console.log(cars);
+
   const [display, setDisplay] = useState([]);
 
   const handleOnChange = (e) => {
@@ -47,7 +49,7 @@ const CarFleet = () => {
 
         <hr />
 
-        <div className="flex space-x-8 mt-5 ">
+        <div className="flex flex-wrap space-x-8 mt-5 space-y-8 ">
           {display.map((item) => (
             <CustomCard key={item._id} {...item} />
           ))}

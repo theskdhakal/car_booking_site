@@ -120,6 +120,19 @@ export const pwdReset = async (email) => {
   }
 };
 
+export const updatePassword = async (newObj) => {
+  try {
+    const resp = await axios.post(userAPI + "/update-password", newObj);
+
+    return resp.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
 // **************car****************
 export const postCar = async (obj) => {
   console.log(obj);

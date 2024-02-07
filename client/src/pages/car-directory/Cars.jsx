@@ -19,7 +19,6 @@ const Cars = () => {
           </button>
         </Link>
       </div>
-
       <div className="mt-3">
         <CarTable />
       </div>

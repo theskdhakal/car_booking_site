@@ -2,6 +2,7 @@ import {
   getAllUsers,
   loginUser,
   pwdReset,
+  updatePassword,
   updateUser,
 } from "../../helper/axios";
 import toast from "react-hot-toast";
@@ -33,5 +34,11 @@ export const updateUserProfileAction = (data) => async (dispatch) => {
 
 export const pwdResetAction = async (email) => {
   const result = await pwdReset(email);
+  return result;
+};
+
+export const updatePasswordAction = async (newObj) => {
+  const result = await updatePassword(newObj);
+  console.log(result);
   return result;
 };

@@ -7,6 +7,7 @@ import { setUser } from "../../pages/signup-signIn/userSlice";
 import { persistor } from "../../store";
 import { MdLogout } from "react-icons/md";
 import { AiOutlineMenuUnfold, AiOutlineMenuFold } from "react-icons/ai";
+import { useMediaQuery } from "react-responsive";
 
 export const UserLayout = ({ children }) => {
   const { user } = useSelector((state) => state.userInfo);
@@ -28,15 +29,16 @@ export const UserLayout = ({ children }) => {
     //remove user from redux
     dispatch(setUser({}));
   };
+
   return (
     <div>
       <Header />
       <div className="flex">
         {sidemenu && (
-          <div className="left-menu bg-primary text-white text-center w-1/6 z-5">
-            {user?.role?.toUpperCase()}
+          <div className="left-menu bg-primary text-white  w-1/2 lg:w-1/6 z-5">
+            <h4 className="text-center">{user?.role?.toUpperCase()}</h4>
             <hr />
-            <ul className=" flex flex-col items-start mt-5 pl-12  space-y-5">
+            <ul className=" flex flex-col items-start mt-5  pl-10 space-y-5">
               {user?.role === "admin" ? (
                 <>
                   <li>
@@ -100,7 +102,7 @@ export const UserLayout = ({ children }) => {
           </button>
         </div>
 
-        <div className="right-page w-full">
+        <div className="right-page w-full overflow-x-auto">
           <div className=" main ">{children}</div>
         </div>
       </div>

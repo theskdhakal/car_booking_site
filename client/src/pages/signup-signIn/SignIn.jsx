@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { setPopupShow } from "../../components/modal/popUpSlice";
 import PopUp from "../../components/modal/PopUp";
 import PwdReset from "./PwdReset";
+import { useMediaQuery } from "react-responsive";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,9 @@ const SignIn = () => {
   const handleOnResetPwd = () => {
     dispatch(setPopupShow(true));
   };
+
+  const isMobile = useMediaQuery({ maxWidth: 450 });
+
   return (
     <MainLayout>
       {popupShow && (
@@ -64,10 +68,10 @@ const SignIn = () => {
               </button>
             </div>
           </form>
-          <div className="flex justify-between">
+          <div className={` ${isMobile ? "" : "flex justify-between"}`}>
             <div className=" text-sm">
               <h5
-                className="text-blue-500 underline cursor-pointer"
+                className="text-blue-500 underline cursor-pointer text-end"
                 onClick={() => handleOnResetPwd()}
               >
                 Reset Password{" "}

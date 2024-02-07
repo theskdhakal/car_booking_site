@@ -30,7 +30,7 @@ const PopUp = ({ children }) => {
           aria-hidden="true"
           className="fixed inset-0 flex items-center  justify-center  "
         >
-          <div className="relative bg-white w-1/2  p-5 rounded shadow-lg border  bg-gray-300">
+          <div className="relative bg-white w-full sm:w-1/2  p-5 rounded shadow-lg border  bg-gray-300">
             <button onClick={handleOnClose}>
               <RxCross2
                 className=" absolute top-1 right-1 p-2 cursor-pointer bg-red-700"

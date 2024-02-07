@@ -4,6 +4,7 @@ import {
   getUserByEmail,
   getUserByEmailandCode,
   insertUser,
+  updateByEmail,
   updateUserProfile,
 } from "../models/user/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
@@ -87,7 +88,7 @@ router.get("/verify", async (req, res) => {
     let user;
 
     //validate verification code and email
-    if (mode === "user-verification") {
+    if (mode === "userVerification") {
       user = await getUserByEmailandCode({
         email: e,
         verificationCode: c,
@@ -248,4 +249,34 @@ router.post("/pwdReset", async (req, res) => {
   }
 });
 
+router.post("/update-password", async (req, res) => {
+  try {
+    const { password, email } = req.body;
+
+    req.body.password = hashPassword(password);
+
+    console;
+
+    //updating the user's password in the db
+    const result = await updateByEmail(
+      { email },
+      { password: req.body.password }
+    );
+
+    result
+      ? res.json({
+          status: "success",
+          message: "Password has beeen reset",
+        })
+      : res.json({
+          status: "error",
+          messgae: "Unable to update password",
+        });
+  } catch (error) {
+    res.json({
+      status: "error",
+      messgae: error.message,
+    });
+  }
+});
 export default router;

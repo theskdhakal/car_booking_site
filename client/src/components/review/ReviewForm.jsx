@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CustomInput from "../custom-input/CustomInput";
-
-import { CiStar } from "react-icons/ci";
+import { FaStar } from "react-icons/fa";
+import { FaRegStar } from "react-icons/fa";
 import { postReviewAction } from "./ReviewAction";
 import { useDispatch } from "react-redux";
 
@@ -10,6 +10,8 @@ const ReviewForm = ({ selectedBooking }) => {
   const [formData, setFormData] = useState({
     rating: "5",
   });
+
+  const [selectRating, setSelectedRating] = useState("5");
 
   const ratings = [1, 2, 3, 4, 5];
 
@@ -35,6 +37,12 @@ const ReviewForm = ({ selectedBooking }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleStarClick = (rating) => {
+    setFormData({ ...formData, rating: rating.toString() });
+
+    setSelectedRating(rating.toString()); //updata rating state based on selected star
+  };
+
   const handleOnReview = (e) => {
     e.preventDefault();
 
@@ -52,7 +60,7 @@ const ReviewForm = ({ selectedBooking }) => {
 
   return (
     <div>
-      <h1 className="text-center  mb-2">
+      <h1 className="text-center  mb-2 ">
         Review for :
         <span className="text-amber-700">{selectedBooking.carName} </span>
       </h1>
@@ -68,19 +76,49 @@ const ReviewForm = ({ selectedBooking }) => {
         <label className="block mt-2">Rating</label>
         <div className="text-lg flex mb-2">
           {ratings.map((rating) => (
-            <>
+            // <>
+            //   <input
+            //     onChange={() => {}}
+            //     value={rating.toString()}
+            //     type="radio"
+            //     name="rating"
+            //     id={`s${rating}`}
+            //     required
+            //     hidden
+            //   />
+            //   <label key={rating} htmlFor={`s${rating}`}>
+            //     <CiStar
+            //       onClick={() => handleOnStarClick(rating)}
+            //       className={`cursor-pointer ${
+            //         rating <= parseInt(selectRating)
+            //           ? "text-amber-500"
+            //           : "text-gray-300"
+            //       }`}
+            //     />
+            //   </label>
+            // </>
+            <label key={rating} htmlFor={`s${rating}`}>
               <input
-                onChange={handleOnChange}
-                value={rating.toString()}
+                onChange={() => handleStarClick(rating)}
+                value={rating}
                 type="radio"
                 name="rating"
                 id={`s${rating}`}
                 required
+                hidden
               />
-              <label htmlFor={`s${rating}`}>
-                <CiStar />
-              </label>
-            </>
+              {rating <= formData.rating ? (
+                <FaStar
+                  onClick={() => handleStarClick(rating)}
+                  className="cursor-pointer text-yellow-500"
+                />
+              ) : (
+                <FaRegStar
+                  onClick={() => handleStarClick(rating)}
+                  className="cursor-pointer text-yellow-500"
+                />
+              )}
+            </label>
           ))}
         </div>
 

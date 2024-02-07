@@ -22,3 +22,7 @@ export const getAllUsers = () => {
 export const updateUserProfile = (_id, updateData) => {
   return UserSchema.findByIdAndUpdate(_id, updateData, { new: true });
 };
+
+export const updateByEmail = (email, password) => {
+  return UserSchema.findOneAndUpdate(email, password);
+};

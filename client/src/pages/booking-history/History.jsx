@@ -9,6 +9,7 @@ import ReviewForm from "../../components/review/ReviewForm";
 import { setPopupShow } from "../../components/modal/popUpSlice";
 import PopUp from "../../components/modal/PopUp";
 import Rating from "../../components/review/Rating";
+import { useMediaQuery } from "react-responsive";
 
 const History = () => {
   const { bookings } = useSelector((state) => state.bookingInfo);
@@ -42,6 +43,8 @@ const History = () => {
     setSelectedBooking(bookingItem);
   };
 
+  const isMobile = useMediaQuery({ maxWidth: 450 });
+
   return (
     <UserLayout>
       {popupShow && (
@@ -49,7 +52,8 @@ const History = () => {
           <ReviewForm selectedBooking={selectedBooking} />
         </PopUp>
       )}
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 border ">
+
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 border  ">
         <thead className="text-xs text-gray-700 uppercase bg-gray-100 ">
           <tr>
             <th scope="col" className="px-6 py-3">
