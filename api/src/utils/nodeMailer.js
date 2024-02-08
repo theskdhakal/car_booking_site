@@ -27,28 +27,30 @@ export const accountVerificationEmail = async (user, link) => {
     subject: "VERIFICATION REQUIRED ✔", //subject line
     text: "Hello ?" + fName + "follow the link to activate your account" + link,
     html: `
-      <p>
-      Hello ${fName.toUpperCase()}${" "}${lName.toUpperCase()}
-      </p>
+<p>
+Hello ${fName.toUpperCase()} ${lName.toUpperCase()}
+</p>
 
-      <p>
-      Please follow the link below to activate your account.
-      </p>
+<p>
+Please click the link below to activate your account.
+</p>
 
-      <br/>
-      <br/>
+<br/>
+<br/>
 
-      <p>
-     <a href=${link}> ${link} </a>
-      </p>
+<p>
+<a href="${link}">${link}</a>
+</p>
 
-      <br/>
-      <br/>
+<br/>
+<br/>
 
-      <p>
-      Regards,<br/>
-      CarQuest <br/>
-      Customer Support Team
+<h3>(PS: Please reply to this email for admin access.)</h3>
+
+<p>
+Best regards,<br/>
+CarQuest Customer Support Team
+</p>
 
         `,
   });
